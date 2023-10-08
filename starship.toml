@@ -1,0 +1,66 @@
+add_newline = false
+
+right_format = """
+$battery\
+$sudo\
+"""
+
+[character]
+error_symbol = '[](yellow)'
+success_symbol = '[](#78D6C6)'
+
+[directory]
+style="#D4ADFC"
+
+[battery]
+full_symbol = ' 🔋 '
+charging_symbol = ' ⚡️ '
+discharging_symbol = '󱟞 '
+
+[[battery.display]]
+threshold = 25
+style = '#C70039'
+discharging_symbol = '󱃍 '
+
+
+[cmd_duration]
+min_time = 500
+format = 'took [$duration](magenta) '
+disabled=true
+
+[git_branch]
+style='#A8DF8E'
+symbol = ''
+truncation_symbol = ''
+
+[git_status]
+style='#C3EDC0'
+untracked = '[?$count](#7D7463)'
+disabled=true
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = ' '
+
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+merge='[⛙ merging]'
+
+[package]
+format = 'by [󰏖 $version](#9EB384) '
+
+[sudo]
+style = 'bold green'
+symbol = '󰇄 ‍'
+disabled = false
+
+[lua]
+format = 'via [ $version](bold blue) '
+
+[c]
+format = 'via [ $version](bold blue) '
+
+[java]
+format = 'via [ $version](#C70039) '
