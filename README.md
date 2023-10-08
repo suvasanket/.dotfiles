@@ -8,3 +8,6 @@
 ![CleanShot 2023-10-08 at 20 32 53@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/44db3709-6ee7-448a-818d-6d42ecfc479a)
 This config is *"Not the fastest"* config of mine , i've achieved 49ms before but after some recent modification this is the current state i think i can reduce 
 the startup time further more but at the same time i don't wanna waste my precious time 😅
+
+## Lazy plugins:
+![CleanShot 2023-10-08 at 20 42 57@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/a7fd2eeb-22d6-4530-8a33-31f96e38fe6b)
