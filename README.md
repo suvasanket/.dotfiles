@@ -1,8 +1,11 @@
 # Screenshots:
 ![CleanShot 2023-10-08 at 20 22 32@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/4f2a451a-1d79-4c00-8bb4-bfb255e166e0)
-![CleanShot 2023-10-08 at 20 23 04@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/14425d2d-52ae-421a-a1dc-52e5458d4ce8)
-![CleanShot 2023-10-08 at 20 22 49@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/9335ea56-396f-435f-8c5d-278df4f6b167)
+![CleanShot 2023-10-08 at 20 49 36@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/cc063443-c458-4eb2-ae40-8b0414b75407)
+![CleanShot 2023-10-08 at 20 50 32@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/acd2f398-2c3d-4ce0-b64e-cc3165ee2f16)
+
+## Kitty with Starship Prompt:
 ![CleanShot 2023-10-08 at 20 25 04@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/02496d0e-09e3-4417-a579-f6d49bf715bb)
+![CleanShot 2023-10-08 at 20 56 04@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/f18cfc92-9722-42cf-a70b-9336272888ae)
 
 ## Neovim Startup Time:
 ![CleanShot 2023-10-08 at 20 32 53@2x](https://github.com/suvasanket/.dotfiles/assets/113333521/44db3709-6ee7-448a-818d-6d42ecfc479a)
