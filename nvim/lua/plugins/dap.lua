@@ -3,15 +3,15 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			"rcarriga/nvim-dap-ui",
-			"theHamsta/nvim-dap-virtual-text",
+			{ "rcarriga/nvim-dap-ui" },
+			{ "theHamsta/nvim-dap-virtual-text", opts = {} },
 		},
 		--stylua: ignore
 		keys = {
 			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "BreakPoint" },
 			{ "<Leader>dR", function() require("dap").restart() end, desc = "DapRestart" },
 			{ "<F5>", function() require("dap").continue() end },
-			{ "<S-F5>", function() require("dap").terminate() end },
+			{ "<F6>", function() require("dap").terminate() end },
 			{ "<Leader>dlp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "LogpointMsg" },
 			{ "<F9>", function() require("dap").step_back() end },
 			{ "<F10>", function() require("dap").step_over() end },
@@ -30,8 +30,8 @@ return {
 			local dap = require("dap")
 			local dapui = require("dapui")
 
-			dapui.setup()
 			--dapui
+			dapui.setup()
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
 			end
@@ -52,7 +52,7 @@ return {
 			vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
 			vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" })
 			vim.fn.sign_define("DapStopped", { text = "󰁕", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
-			--------------------------------------------------------------------------------------------------------------------------------------------------------------
+			--config--
 		end,
 	},
 }

@@ -6,15 +6,18 @@ return {
 		--stylua: ignore
 		keys = {
 			{ "<leader>o", "<cmd>Telescope oldfiles<cr>", desc = "RecentFile" },
+			{ "<leader>wg", "<cmd>Telescope grep_string<cr>", desc = "Live_grep" },
 			{ "<leader>ch", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
 			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git_branches" },
+			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Git_files" },
 			{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{ "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
+			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
 			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
 			{ "<leader>f","<cmd>Telescope find_files<cr>", desc = "Find_file" },
 			{ "<leader>cf", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
 			{ "<M-x>" ,"<cmd>Telescope<cr>"},
 			{ "<leader>pf", "<cmd>Telescope projects<cr>", desc = "Project" },
+			{ "<leader>bg", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
 		},
 		config = function()
 			require("telescope").setup({
@@ -42,7 +45,7 @@ return {
 					find_files = {
 						previewer = false,
 						hidden = true,
-						file_ignore_patterns = { "^node_modules/", "^.git/" },
+						file_ignore_patterns = { "*/node_modules/*", "*/.git/*" },
 					},
 					builtin = {
 						theme = "ivy",
@@ -52,6 +55,22 @@ return {
 						prompt_prefix = " ",
 						layout_config = {
 							height = 0.4,
+						},
+					},
+					git_branches = {
+						theme = "dropdown",
+						layout_config = {
+							height = 0.4,
+						},
+					},
+					grep_string = {
+						layout_config = {
+							preview_width = 0.6,
+						},
+					},
+					current_buffer_fuzzy_find = {
+						layout_config = {
+							preview_width = 0.6,
 						},
 					},
 				},
@@ -68,8 +87,8 @@ return {
 		config = function()
 			require("project_nvim").setup({
 				--stylua: ignore
-				patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "init.lua", "pom.xml" },
-				exclude_dirs = { "^node_modules/*" },
+				patterns = { ".git", "package.json", ">init.lua", "pom.xml","=neorg" },
+				exclude_dirs = { "*/node_modules/*" },
 			})
 		end,
 	},
@@ -123,6 +142,17 @@ return {
 				},
 				name = {
 					use_git_status_colors = false,
+				},
+				symbols = {
+					added = "✚",
+					deleted = "✖",
+					modified = "",
+					renamed = "",
+					untracked = "",
+					ignored = "",
+					unstaged = "u",
+					staged = "",
+					conflict = "",
 				},
 			},
 			event_handlers = {

@@ -73,6 +73,7 @@ return {
 						{
 							"filename",
 							path = 3,
+							shorting_target = 40,
 							symbols = {
 								modified = "󰳻",
 								readonly = "",
@@ -87,15 +88,14 @@ return {
 							symbols = { error = " ", warn = " ", info = " " },
 						},
 					},
-					lualine_y = {
-						"encoding",
-						-- "filesize",
-					},
+					lualine_y = {},
 					lualine_z = {
+						"encoding",
+						"filesize",
+						-- Lsp server name .
 						{
-							-- Lsp server name .
 							function()
-								local msg = "No Active Lsp"
+								local msg = ""
 								local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 								local clients = vim.lsp.get_active_clients()
 								if next(clients) == nil then
@@ -109,7 +109,6 @@ return {
 								end
 								return msg
 							end,
-							icon = " :",
 						},
 					},
 				},
@@ -126,6 +125,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			options = {
+				always_show_bufferline = true,
 				show_buffer_close_icons = false,
 				themable = true,
 				diagnostics = "nvim_lsp",

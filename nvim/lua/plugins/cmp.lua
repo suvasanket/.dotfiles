@@ -23,7 +23,6 @@ return {
 			vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#191717", blend = 09 })
 			local cmp = require("cmp")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			cmp.setup({
 				formatting = {
@@ -40,6 +39,7 @@ return {
 							luasnip = "[s]",
 							cmdline = "[c]",
 							codeium = "[c]",
+							neorg = "[n]",
 						},
 					}),
 				},
@@ -68,7 +68,6 @@ return {
 				experimental = {
 					ghost_text = true,
 				},
-
 				mapping = cmp.mapping.preset.insert({
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -104,6 +103,8 @@ return {
 					{ name = "luasnip", priority = 82 },
 					{ name = "buffer", priority = 50 },
 					{ name = "codeium" },
+					{ name = "neorg", priority = 100 },
+					{ name = "orgmode", priority = 100 },
 				},
 			})
 

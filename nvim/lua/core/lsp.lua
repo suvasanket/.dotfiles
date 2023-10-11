@@ -1,7 +1,13 @@
 local lsp = require("lspconfig")
 local root_pattern = lsp.util.root_pattern
+
+--capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 
 --lsp-virtualText_prefix--
 vim.diagnostic.config({
@@ -82,9 +88,6 @@ lsp.tsserver.setup({
 lsp.cssls.setup({
 	single_file_support = false,
 })
-
---java
-lsp.jdtls.setup({})
 
 --html
 lsp.emmet_ls.setup({})

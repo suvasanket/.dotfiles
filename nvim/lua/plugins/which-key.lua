@@ -8,21 +8,25 @@ return {
 				["x"] = { name = "kill-buffer" },
 			},
 			["<leader>"] = {
-				["q"] = { name = "+macro/session" },
-				["r"] = { name = "+run" },
 				["<leader>"] = { name = "+swap" },
-				["w"] = {
+				q = { name = "+macro/session" },
+				r = { name = "+run" },
+				w = {
 					name = "+workspace/write",
 					l = { "list_workspace_folders" },
 					a = { "add_workspace_folder" },
 					r = { "remove_workspace_folder" },
 				},
-				p = {
-					name = "+lsp/project",
+				c = {
+					name = "+code/config",
+					p = { "+peek" },
 				},
 				g = { name = "+git" },
 				d = { name = "+dap" },
 				b = { name = "+buffer" },
+				n = { name = "+notes" },
+				p = { name = "+project" },
+				k = "signature_help",
 			},
 			["g"] = {
 				c = { "line-comment" },
@@ -123,6 +127,14 @@ return {
 		vim.o.timeoutlen = 300
 		require("which-key").setup({
 			window = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
+			key_labels = {
+				-- override the label used to display some keys. It doesn't effect WK in any other way.
+				-- For example:
+				["<space>"] = "SPC",
+				["<cr>"] = "RET",
+				["<CR>"] = "RET",
+				["<tab>"] = "TAB",
+			},
 		})
 	end,
 }

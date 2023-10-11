@@ -1,4 +1,3 @@
-require("core.autocmd")
 local o = vim.opt
 local c = vim.cmd
 local create_command = vim.api.nvim_create_user_command
@@ -42,7 +41,31 @@ o.fillchars = "fold: ,eob: "
 
 --fold
 o.foldmethod = "manual"
-o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' .. '.trim(getline(v:foldend)) ]]
+c([[
+function! GetSpaces(foldLevel)
+    if &expandtab == 1
+        " Indenting with spaces
+        let str = repeat(" ", a:foldLevel / (&shiftwidth + 1) - 1)
+        return str
+    elseif &expandtab == 0
+        " Indenting with tabs
+        return repeat(" ", indent(v:foldstart) - (indent(v:foldstart) / &shiftwidth))
+    endif
+endfunction
+
+function! MyFoldText()
+    let startLineText = getline(v:foldstart)
+    let endLineText = trim(getline(v:foldend))
+    let indentation = GetSpaces(foldlevel("."))
+    let spaces = repeat(" ", 200)
+
+    let str = indentation . startLineText . ".." . spaces
+
+    return str
+endfunction
+
+" Custom display for text when folding
+set foldtext=MyFoldText()]])
 o.foldnestmax = 3
 o.foldminlines = 1
 
@@ -90,7 +113,7 @@ o.scrolloff = 17
 
 --indent
 o.autoindent = true
-o.smartindent = true
+o.smartindent = false
 
 --format
 o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -98,3 +121,7 @@ o.formatexpr = "v:lua.require'conform'.formatexpr()"
 --status line
 o.laststatus = 0
 o.ruler = false
+
+--conceal
+o.conceallevel = 2
+o.concealcursor = "nc"

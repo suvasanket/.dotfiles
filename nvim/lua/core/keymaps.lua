@@ -14,17 +14,20 @@ end
 map("n", "<leader>t", "<cmd>15 split term://zsh<cr>i")
 map("i", "<M-BS>", "<C-W>")
 map("n", "<tab>", "za")
-map("n", "zx", cmd("bd!"))
 map("n", "<leader>ww", cmd("noa w!"), { desc = "save withoutformat" })
-map("n", "<leader>cd", cmd("lcd%:p:h<cr>:echo 'current dir is now ' . getcwd()"), { desc = "cd" })
+map("n", "<leader>pc", cmd("lcd%:p:h<cr>:echo 'current dir is now ' . getcwd()"), { desc = "cd" })
+map("n", "<C-\\>", "<C-z>")
+map("n", "<leader>cft", ":e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.lua<CR>", { desc = "ftplugin" })
 
 -- Beginning and end of line in `:` command mode
 map("c", "<C-a>", "<home>")
 map("c", "<C-e>", "<end>")
 
---quit
+--buffer
+map("n", "zx", cmd("bd!"))
 map("t", "<C-[>", "<C-\\><C-n>")
 map("v", "<C-c>", "<ESC>")
+map("n", "<leader>bf", "ggVG=", { desc = "buffer format" })
 
 --split
 map("n", "<leader>-", "<C-w>s", { desc = "split-" })
@@ -32,20 +35,11 @@ map("n", "<leader>|", "<C-w>v", { desc = "split|" })
 map("n", "<leader>=", "<C-w>=", { desc = "split=" })
 map("n", "<leader>m", "<C-w>_<C-w>|", { desc = "split max" })
 
---runner
-map("v", "<leader>rc", cmd("SnipRun"), { desc = "RunSelectedCode" })
-map("n", "<leader>rC", cmd("SnipClose"), { desc = "SnipClose" })
-
 --git
 map("n", "<leader>gs", cmd("Gitsigns stage_buffer"))
-map("n", "<leader>g0", cmd("Gitsigns reset_buffer_index"))
+map("n", "<leader>g0", cmd("Gitsigns reset_buffer"))
 map("n", "<leader>ga", cmd("Gitsigns toggle_current_line_blame"))
-map(
-	"n",
-	"<leader>gl",
-	'<cmd>lcd%:p:h<cr><cmd>lua require("lazy.util").float_term({ "lazygit" }, { interactive = true })<cr>',
-	{ desc = "lazygit" }
-)
+map("n", "<leader>gl", '<cmd>lcd%:p:h<cr><cmd>lua require("lazy.util").float_term({ "lazygit" }, { interactive = true })<cr>', { desc = "lazygit" })
 
 --helix
 map("n", "gl", "$")

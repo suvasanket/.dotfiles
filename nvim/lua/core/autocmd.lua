@@ -1,4 +1,3 @@
-require("core.keymaps")
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local hl = function(name, val, id)
@@ -21,11 +20,9 @@ autocmd("VimEnter", {
 		hl("CursorLineNr", { fg = "#FF9B50" })
 		hl("CursorLine", { blend = 12 })
 		hl("TelescopeBorder", { fg = "#A8A196", bold = true })
-		hl("Folded", { fg = "#FFF2D8" })
+		hl("Folded", { fg = "#7D7C7C" })
 		hl("VertSplit", { fg = "#FFC6AC" })
 		hl("NeogitFold", { bg = "NONE" })
-		hl("MiniIndentscopeSymbol", { fg = "#D5B4B4" })
-		hl("MiniIndentscopeSymbolOff", { fg = "#D5B4B4" })
 	end,
 })
 
@@ -82,25 +79,11 @@ autocmd("BufReadPost", {
 	end,
 })
 
---auto reload
+--hot reload
 autocmd("BufWritePost", {
 	pattern = "*.lua",
 	callback = function()
 		vim.cmd.source()
-	end,
-})
-
---terminal
-autocmd("TermOpen", {
-	callback = function()
-		vim.o.number = false
-		vim.o.relativenumber = false
-	end,
-})
-autocmd("TermClose", {
-	callback = function()
-		vim.o.number = true
-		vim.o.relativenumber = true
 	end,
 })
 

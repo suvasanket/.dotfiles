@@ -34,10 +34,10 @@ return {
 				java = { "clang_format" },
 				zsh = { "beautysh" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
+			-- format_on_save = {
+			-- 	timeout_ms = 500,
+			-- 	lsp_fallback = true,
+			-- },
 		},
 	},
 
@@ -72,10 +72,10 @@ return {
 		--stylua: ignore
 		keys = {
 			{ "gr", "<cmd>Lspsaga finder<cr>", desc = "lspFinder" },
-			{ "<leader>pd", "<cmd>Lspsaga peek_definition<CR>", desc = "peek_defination" },
-			{ "<Leader>pi", "<cmd>Lspsaga incoming_calls<CR>", desc = "incoming_calls" },
-			{ "<Leader>po", "<cmd>Lspsaga outgoing_calls<CR>", desc = "outgoing_calls" },
-			{ "<leader>pt", "<cmd>Lspsaga peek_type_definition<CR>", desc = "peek_type_definition" },
+			{ "<leader>cpd", "<cmd>Lspsaga peek_definition<CR>", desc = "peek_defination" },
+			{ "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", desc = "incoming_calls" },
+			{ "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", desc = "outgoing_calls" },
+			{ "<leader>cpt", "<cmd>Lspsaga peek_type_definition<CR>", desc = "peek_type_definition" },
 			{ "<leader>wd", "<cmd>Lspsaga show_workspace_diagnostics<CR>", desc = "workspaceDiagnostics" },
 			{ "<leader>bd", "<cmd>Lspsaga show_buf_diagnostics<CR>", desc = "bufDiagnostics" },
 			{ "<F4>", "<cmd>Lspsaga code_action<CR>", desc = "code_action" },
@@ -124,4 +124,7 @@ return {
 			},
 		},
 	},
+
+	--jdtls
+	{ "mfussenegger/nvim-jdtls", ft = {"java","xml"} },
 }

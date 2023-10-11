@@ -4,7 +4,4 @@ return {
 
 	--icons
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
-
-	-- impaitent
-	{ "lewis6991/impatient.nvim" },
 }

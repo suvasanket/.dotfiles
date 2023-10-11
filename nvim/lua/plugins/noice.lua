@@ -8,6 +8,13 @@ return {
 			{ "<leader>ms", "<cmd>Noice<cr>", desc = "messages" },
 		},
 		opts = {
+			views = {
+				mini = {
+					win_options = {
+						winblend = 0,
+					},
+				},
+			},
 			cmdline = {
 				enabled = true,
 				view = "cmdline", --cmdline/cmdline_popup
@@ -54,7 +61,7 @@ return {
 			-- minimum_width = 30,
 			render = "wrapped-compact",
 			stages = "fade_in_slide_out",
-			top_down = false,
+			top_down = true,
 			icons = {
 				DEBUG = "",
 				ERROR = "",
@@ -64,15 +71,15 @@ return {
 			},
 		},
 	},
+
 	--nui
 	{ "MunifTanjim/nui.nvim", lazy = true },
 
 	--dressing
 	{
 		"stevearc/dressing.nvim",
-		lazy = true,
+		event="VeryLazy",
 		init = function()
-			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
 				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.select(...)

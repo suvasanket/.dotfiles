@@ -86,4 +86,7 @@ return {
 			},
 		},
 	},
+
+	--fugitive
+	{ "tpope/vim-fugitive", cmd = { "G" }, enabled = false },
 }
