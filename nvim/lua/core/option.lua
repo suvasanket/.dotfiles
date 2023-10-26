@@ -33,7 +33,7 @@ c([[
 ]])
 
 --appearance
-c("colorscheme rose-pine")
+vim.cmd.colorscheme("rose-pine")
 o.termguicolors = true
 o.signcolumn = "yes"
 o.hlsearch = false
@@ -80,16 +80,18 @@ o.undofile = true
 o.updatetime = 50
 o.autochdir = false
 
---line number
+--line and cursor
 o.relativenumber = true
 o.number = true
 o.cursorline = true
+o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
 
 --tab indent
 o.tabstop = 4
 o.softtabstop = 4
 o.wrap = false
 o.list = false
+o.expandtab = true
 
 --search
 o.ignorecase = true
@@ -124,4 +126,4 @@ o.ruler = false
 
 --conceal
 o.conceallevel = 2
-o.concealcursor = "nc"
+o.concealcursor = "n"

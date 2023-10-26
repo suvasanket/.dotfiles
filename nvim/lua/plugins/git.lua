@@ -8,7 +8,7 @@ return {
 			"sindrets/diffview.nvim",
 		},
 		keys = {
-			{ "<leader>g", "<cmd>Neogit cwd=%:p:h<cr>", desc = "Neogit" },
+			{ "<leader>gg", "<cmd>Neogit cwd=%:p:h<cr>", desc = "Neogit" },
 		},
 		opts = {
 			disable_hint = true,
@@ -60,30 +60,16 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		keys = {
+			{ "<leader>gs", "<cmd>Git stage_buffer<cr>", desc = "git stage buffer" },
+			{ "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", mode = { "v" }, desc = "git stage hunk" },
+			{ "<leader>g0", "<cmd>Git reset_buffer<cr>", desc = "git reset buffer" },
+			{ "<leader>ga", "<cmd>Git toggle_current_line_blame<cr>", desc = "git blame" },
+		},
 		opts = {
-			signs = {
-				add = { hl = "GitSignsAdd", text = " │", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-				change = {
-					hl = "GitSignsChange",
-					text = " │",
-					numhl = "GitSignsChangeNr",
-					linehl = "GitSignsChangeLn",
-				},
-				delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-				topdelete = {
-					hl = "GitSignsDelete",
-					text = "-",
-					numhl = "GitSignsDeleteNr",
-					linehl = "GitSignsDeleteLn",
-				},
-				changedelete = {
-					hl = "GitSignsChange",
-					text = "~",
-					numhl = "GitSignsChangeNr",
-					linehl = "GitSignsChangeLn",
-				},
-				untracked = { hl = "GitSignsAdd", text = "", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-			},
+			signcolumn = true,
+			numhl = false,
+			linehl = false,
 		},
 	},
 

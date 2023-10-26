@@ -34,16 +34,18 @@ end
 local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "gtd", vim.lsp.buf.type_definition, opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+	vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
+	vim.keymap.set("n", "gtd", "<cmd>Lspsaga goto_type_definition<cr>", opts)
+	vim.keymap.set("n", "K","<cmd>Lspsaga hover_doc<cr>", opts)
 	vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, opts)
 	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 	vim.keymap.set("n", "<space>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, opts)
+
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.buf.inlay_hint(bufnr, true)
 	end

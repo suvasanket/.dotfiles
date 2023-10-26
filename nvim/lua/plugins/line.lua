@@ -2,7 +2,7 @@ return {
 	--Lualine
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
+		event = "BufAdd",
 		config = function()
 			local thyme = require("lualine.themes.codedark")
 			local colors = {
@@ -122,7 +122,7 @@ return {
 	--bar
 	{
 		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
+		event = "BufAdd",
 		opts = {
 			options = {
 				always_show_bufferline = true,
@@ -138,12 +138,14 @@ return {
 						separator = true,
 					},
 				},
+
 			},
 			highlights = {
 				indicator_selected = {
 					fg = "#C3EDC0",
 				},
 			},
+
 		},
 	},
 }

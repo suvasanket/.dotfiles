@@ -5,19 +5,25 @@ return {
 		dependencies = {},
 		--stylua: ignore
 		keys = {
-			{ "<leader>o", "<cmd>Telescope oldfiles<cr>", desc = "RecentFile" },
-			{ "<leader>wg", "<cmd>Telescope grep_string<cr>", desc = "Live_grep" },
-			{ "<leader>ch", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
-			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git_branches" },
-			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Git_files" },
-			{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+			{ "<leader>-", function () vim.cmd("split") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "split" },
+			{ "<leader>|", function () vim.cmd("vsplit") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "vsplit" },
+			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "RecentFile" },
+			{ "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
+			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+			{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Project" },
+			{ "<leader>ff","<cmd>Telescope find_files<cr>", desc = "Find_file" },
+			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
 			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
-			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
-			{ "<leader>f","<cmd>Telescope find_files<cr>", desc = "Find_file" },
-			{ "<leader>cf", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
-			{ "<M-x>" ,"<cmd>Telescope<cr>"},
-			{ "<leader>pf", "<cmd>Telescope projects<cr>", desc = "Project" },
 			{ "<leader>bg", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
+			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
+			{ "<leader>wg", "<cmd>Telescope grep_string<cr>", desc = "Live_grep" },
+			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "git branches" },
+			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "git files" },
+			{ "<M-x>" ,"<cmd>Telescope<cr>"},
+			{"<leader>no",function ()
+					vim.cmd "vsplit"
+					require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } })
+			end, desc = "Neorg file open"}
 		},
 		config = function()
 			require("telescope").setup({
@@ -43,7 +49,7 @@ return {
 				},
 				pickers = {
 					find_files = {
-						previewer = false,
+						previewer = true,
 						hidden = true,
 						file_ignore_patterns = { "*/node_modules/*", "*/.git/*" },
 					},
@@ -52,7 +58,7 @@ return {
 						previewer = false,
 						prompt_title = false,
 						results_title = "Commands",
-						prompt_prefix = " ",
+						prompt_prefix = " ",
 						layout_config = {
 							height = 0.4,
 						},
@@ -86,8 +92,8 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("project_nvim").setup({
-				--stylua: ignore
-				patterns = { ".git", "package.json", ">init.lua", "pom.xml","=neorg" },
+				detection_methods = { "lsp", "pattern" },
+				patterns = { ".git", "package.json", ">init.lua", "pom.xml", "=neorg" },
 				exclude_dirs = { "*/node_modules/*" },
 			})
 		end,
@@ -101,6 +107,34 @@ return {
 			{ "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Neotree" },
 		},
 		opts = {
+			default_component_configs = {
+				symbols = {
+					added = "✚",
+					deleted = "✖",
+					modified = "",
+					renamed = "󰑕",
+					untracked = "",
+					ignored = "",
+					unstaged = "󰅘",
+					staged = "",
+					conflict = "",
+				},
+				indent = {
+					with_expanders = true,
+					expander_collapsed = "",
+					expander_expanded = "",
+					expander_highlight = "NeoTreeExpander",
+				},
+				icon = {
+					folder_closed = "󰉋 ",
+					folder_open = "󰝰 ",
+					folder_empty = "󰉖 ",
+					default = "󰈔",
+				},
+				name = {
+					use_git_status_colors = false,
+				},
+			},
 			enable_diagnostics = true,
 			enable_git_status = true,
 			close_if_last_window = true,
@@ -125,34 +159,6 @@ return {
 						["|"] = "open_vsplit",
 						["/"] = "none",
 					},
-				},
-			},
-			default_component_configs = {
-				indent = {
-					with_expanders = true,
-					expander_collapsed = "",
-					expander_expanded = "",
-					expander_highlight = "NeoTreeExpander",
-				},
-				icon = {
-					folder_closed = "󰉋 ",
-					folder_open = "󰝰 ",
-					folder_empty = "󰉖 ",
-					default = "󰈔",
-				},
-				name = {
-					use_git_status_colors = false,
-				},
-				symbols = {
-					added = "✚",
-					deleted = "✖",
-					modified = "",
-					renamed = "",
-					untracked = "",
-					ignored = "",
-					unstaged = "u",
-					staged = "",
-					conflict = "",
 				},
 			},
 			event_handlers = {

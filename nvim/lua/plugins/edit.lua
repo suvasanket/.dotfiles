@@ -1,16 +1,4 @@
 return {
-	--mini-operate
-	{
-		"echasnovski/mini.operators",
-		event = "BufReadPre",
-		opts = {
-			exchange = {
-				prefix = "ge",
-				reindent_linewise = true,
-			},
-		},
-	},
-
 	--autopairs
 	{
 		"windwp/nvim-autopairs",
@@ -98,7 +86,7 @@ return {
 						a = { "@block.outer", "@conditional.outer", "@loop.outer" },
 						i = { "@block.inner", "@conditional.inner", "@loop.inner" },
 					}, {}),
-					f = ai.gen_spec.treesitter({
+					m = ai.gen_spec.treesitter({
 						a = "@function.outer",
 						i = "@function.inner",
 					}, {}),

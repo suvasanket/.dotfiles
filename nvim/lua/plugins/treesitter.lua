@@ -45,16 +45,18 @@ return {
 						enable = true,
 						set_jumps = true, -- whether to set jumps in the jumplist
 						goto_next = {
-							["]f"] = { query = "@function.*", desc = "next function" },
+							["]m"] = { query = "@function.*", desc = "next function" },
 							["]l"] = { query = "@loop.*", desc = "next loop" },
 							["]c"] = { query = "@conditional.*", desc = "next conditional" },
 							-- ["[c"] = "@class.outer",
+							["]z"] = { query = "@fold", query_group = "folds", desc = "next fold" },
 						},
 						goto_previous = {
-							["[f"] = { query = "@function.*", desc = "prev function" },
+							["[m"] = { query = "@function.*", desc = "prev function" },
 							["[l"] = { query = "@loop.*", desc = "prev loop" },
 							["[c"] = { query = "@conditional.*", desc = "prev conditional" },
 							-- ["[c"] = "@class.outer",
+							["[z"] = { query = "@fold", query_group = "folds", desc = "prev fold" },
 						},
 					},
 				},

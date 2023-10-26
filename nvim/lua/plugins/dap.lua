@@ -11,7 +11,7 @@ return {
 			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "BreakPoint" },
 			{ "<Leader>dR", function() require("dap").restart() end, desc = "DapRestart" },
 			{ "<F5>", function() require("dap").continue() end },
-			{ "<F6>", function() require("dap").terminate() end },
+			{ "<F6>","<cmd>DapTerminate<cr>" },
 			{ "<Leader>dlp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "LogpointMsg" },
 			{ "<F9>", function() require("dap").step_back() end },
 			{ "<F10>", function() require("dap").step_over() end },
@@ -52,6 +52,7 @@ return {
 			vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
 			vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" })
 			vim.fn.sign_define("DapStopped", { text = "󰁕", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+
 			--config--
 		end,
 	},

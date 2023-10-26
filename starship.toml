@@ -1,9 +1,7 @@
 add_newline = false
 
-right_format = """
-$battery\
-$sudo\
-"""
+# format="""$character"""
+# right_format = """$all"""
 
 [character]
 error_symbol = '[](yellow)'

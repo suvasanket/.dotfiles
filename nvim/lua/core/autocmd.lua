@@ -9,20 +9,22 @@ local hl = function(name, val, id)
 end
 local yank = augroup("yank", { clear = true })
 
---HghLight--
+--HghLight
 autocmd("VimEnter", {
 	pattern = "*",
 	callback = function()
 		hl("SagaLightBulb", { fg = "#FFD93D" })
 		hl("SagaBeacon", { bg = "#29a4bd" })
-		hl("Visual", { bg = "#4F4557", fg = "#D5B4B4" })
 		hl("LspSagaFinderSelection", { fg = "#61677A" })
-		hl("CursorLineNr", { fg = "#FF9B50" })
 		hl("CursorLine", { blend = 12 })
-		hl("TelescopeBorder", { fg = "#A8A196", bold = true })
 		hl("Folded", { fg = "#7D7C7C" })
-		hl("VertSplit", { fg = "#FFC6AC" })
 		hl("NeogitFold", { bg = "NONE" })
+		hl("Search", { bg = "#4F4557" })
+		hl("IlluminatedWordText", { link = "Visual" })
+		hl("IlluminatedWordRead", { link = "Visual" })
+		hl("IlluminatedWordWrite", { link = "Visual" })
+		hl("hlyank", { bg = "#FF9B50" })
+		hl("SignColumn", { fg = "NONE" })
 	end,
 })
 
@@ -30,7 +32,7 @@ autocmd("VimEnter", {
 autocmd("TextYankPost", {
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 60 })
+		vim.highlight.on_yank({ higroup = "hlyank", timeout = 100 })
 	end,
 	group = yank,
 })
@@ -60,6 +62,7 @@ autocmd("FileType", {
 		"lspinfo",
 		"trouble",
 		"crunner",
+		"quickfix",
 	},
 	callback = function(event)
 		vim.opt_local.wrap = false

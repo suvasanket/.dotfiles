@@ -14,14 +14,7 @@ return {
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		keys = {
-			{
-				"<F1>",
-				function()
-					require("conform").format()
-				end,
-				mode = { "n", "i" },
-				desc = "format",
-			},
+			{ "<C-]>", function() require("conform").format() end, mode = { "n", "i" }, desc = "format" },
 		},
 		opts = {
 			formatters_by_ft = {
@@ -71,25 +64,27 @@ return {
 		event = "LspAttach",
 		--stylua: ignore
 		keys = {
-			{ "gr", "<cmd>Lspsaga finder<cr>", desc = "lspFinder" },
 			{ "<leader>cpd", "<cmd>Lspsaga peek_definition<CR>", desc = "peek_defination" },
-			{ "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", desc = "incoming_calls" },
-			{ "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", desc = "outgoing_calls" },
+			{ "<Leader>cci", "<cmd>Lspsaga incoming_calls<CR>", desc = "incoming_calls" },
+			{ "<Leader>cco", "<cmd>Lspsaga outgoing_calls<CR>", desc = "outgoing_calls" },
 			{ "<leader>cpt", "<cmd>Lspsaga peek_type_definition<CR>", desc = "peek_type_definition" },
 			{ "<leader>wd", "<cmd>Lspsaga show_workspace_diagnostics<CR>", desc = "workspaceDiagnostics" },
 			{ "<leader>bd", "<cmd>Lspsaga show_buf_diagnostics<CR>", desc = "bufDiagnostics" },
-			{ "<F4>", "<cmd>Lspsaga code_action<CR>", desc = "code_action" },
-			{ "<F3>", "<cmd>Lspsaga rename<CR>", desc = "rename" },
+			{ "<leader>ca", "<cmd>Lspsaga code_action<CR>", desc = "code_action" },
+			{ "<leader>cr", "<cmd>Lspsaga rename<CR>", desc = "rename" },
 			{ "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "diagnostic" },
 			{ "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", desc = "diagnostic" },
 			{ "[e", function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Error" },
 			{ "]e", function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Error" },
-			{ "K", "<cmd>Lspsaga hover_doc<CR>" },
+			{"<leader>t","<cmd>Lspsaga term_toggle<cr>",desc="term_toggle"}
 		},
 		opts = {
 			code_action = {
 				num_shortcut = false,
 				keys = { quit = { "q", "<C-c>" } },
+			},
+			rename = {
+				keys = { quit = { "<C-c>" } },
 			},
 			finder = {
 				max_height = 0.6,
@@ -110,7 +105,7 @@ return {
 			ui = {
 				border = "rounded",
 				code_action = "",
-				title = true,
+				title = false,
 			},
 			symbol_in_winbar = {
 				enable = false,
@@ -120,11 +115,11 @@ return {
 			},
 			lightbulb = {
 				virtual_text = false,
-				sign = true,
+				sign = false,
 			},
 		},
 	},
 
 	--jdtls
-	{ "mfussenegger/nvim-jdtls", ft = {"java","xml"} },
+	{ "mfussenegger/nvim-jdtls", ft = { "java", "xml" } },
 }

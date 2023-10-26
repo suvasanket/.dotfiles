@@ -23,7 +23,6 @@ local function get_config_dir()
 	end
 end
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
 	capabilities = capabilities,
 
@@ -34,40 +33,11 @@ local config = {
 			autobuild = {
 				enabled = false,
 			},
-			eclipse = {
-				downloadSources = true,
-			},
-			configuration = {
-				updateBuildConfiguration = "interactive",
-				-- runtimes = {
-				--     {
-				--         name = "JavaSE-20",
-				--         path = "~/Library/Java/JavaVirtualMachines/jdk-20.0.2.jdk/Contents/Home",
-				--     },
-				-- },
-			},
-			maven = {
-				downloadSources = true,
-			},
-			referencesCodeLens = {
-				enabled = true,
-			},
-			references = {
-				includeDecompiledSources = true,
-			},
-			inlayHints = {
-				parameterNames = {
-					enabled = "all", -- literals, all, none
-				},
-			},
-			format = {
-				enabled = false,
-			},
 		},
-		signatureHelp = { enabled = true },
+		["java.format.settings.url"] = vim.fn.expand("~/formatter.xml"),
 	},
 
-	root_dir = vim.fs.dirname(vim.fs.find({ "mvnw", "gradlew", "pom.xml", ".git" }, { upward = true })[1]),
+	root_dir = vim.fs.dirname(vim.fs.find({ "pom.xml", ".git" }, { upward = true })[1]),
 
 	init_options = {
 		extendedClientCapabilities = jdtls.extendedClientCapabilities,
@@ -84,13 +54,38 @@ local config = {
 
 		local opts = { silent = true, buffer = bufnr }
 		local map = vim.keymap.set
+
+		map("n", "gD", vim.lsp.buf.declaration, opts)
+		map("n", "gi", vim.lsp.buf.implementation, opts)
+		map("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+		map("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
+		map("n", "gtd", "<cmd>Lspsaga goto_type_definition<cr>", opts)
+		map("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+		map("n", "<leader>k", vim.lsp.buf.signature_help, opts)
+
 		map("n", "<leader>coi", jdtls.organize_imports, { desc = "Organize imports", buffer = bufnr })
 		map("n", "<leader>ctc", jdtls.test_class, { desc = "test class", buffer = bufnr })
 		map("n", "<leader>ctm", jdtls.test_nearest_method, { desc = "test method", buffer = bufnr })
 		map("n", "<leader>cev", jdtls.extract_variable_all, { desc = "Extract variable", buffer = bufnr })
-		map("v", "<leader>cem", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], { desc = "Extract method", buffer = bufnr })
+		map(
+			"v",
+			"<leader>cem",
+			[[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
+			{ desc = "Extract method", buffer = bufnr }
+		)
 		map("n", "<leader>cec", jdtls.extract_constant, { desc = "Extract constant", buffer = bufnr })
 	end,
 }
 
 jdtls.start_or_attach(config)
+
+require("which-key").register({
+	["<leader>"] = {
+		c = {
+			name = "+code",
+			t = { name = "Test" },
+			e = { name = "Extract" },
+			o = { name = "Organize" },
+		},
+	},
+})

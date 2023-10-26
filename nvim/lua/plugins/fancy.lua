@@ -4,58 +4,30 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine",
 		opts = {
-			--- @usage 'auto'|'main'|'moon'|'dawn'
-			variant = "auto",
-			--- @usage 'main'|'moon'|'dawn'
 			dark_variant = "moon",
-			bold_vert_split = false,
-			dim_nc_background = false,
 			disable_background = true,
 			disable_float_background = true,
-			disable_italics = false,
 
-			--- @usage string hex value or named color from rosepinetheme.com/palette
 			groups = {
-				background = "base",
-				background_nc = "_experimental_nc",
-				panel = "surface",
-				panel_nc = "base",
-				border = "highlight_med",
+				border = "subtle",
 				comment = "muted",
-				link = "iris",
-				punctuation = "subtle",
-
-				error = "love",
-				hint = "iris",
-				info = "foam",
-				warn = "gold",
-
-				headings = {
-					h1 = "iris",
-					h2 = "foam",
-					h3 = "rose",
-					h4 = "gold",
-					h5 = "pine",
-					h6 = "foam",
-				},
-				-- or set all headings at once
-				-- headings = 'subtle'
 			},
 
-			-- Change specific vim highlight groups
-			-- https://github.com/rose-pine/neovim/wiki/Recipes
 			highlight_groups = {
-				FloatBorder = { fg = "rose" },
+				FloatBorder = { fg = "iris" },
 				ColorColumn = { bg = "rose" },
-
-				-- Blend colours against the "base" background
 				CursorLine = { bg = "foam", blend = 10 },
 				StatusLine = { fg = "love", bg = "love", blend = 10 },
-
-				-- By default each group adds to the existing config.
-				-- If you only want to set what is written in this config exactly,
-				-- you can set the inherit option:
 				Search = { bg = "gold", inherit = true },
+				MiniIndentscopeSymbol = { fg = "pine" },
+				MiniIndentscopeSymbolOff = { fg = "pine", bold = true },
+				NeorgHeading1Prefix = { fg = "love" },
+				NeorgHeading2Prefix = { fg = "iris" },
+				NeorgHeading3Prefix = { fg = "pine" },
+				NeorgHeading4Prefix = { fg = "gold" },
+				NeorgHeading5Prefix = { fg = "foam" },
+				NeorgHeading6Prefix = { fg = "rose" },
+				CursorLineNr = { fg = "iris" },
 			},
 		},
 	},
@@ -63,7 +35,7 @@ return {
 	--colorize
 	{
 		"norcalli/nvim-colorizer.lua",
-		ft = { "css", "js", "html", "lua" },
+		ft = { "css", "js", "html", "lua", "yml" },
 		config = function()
 			require("colorizer").setup({
 				"lua",
@@ -154,9 +126,29 @@ return {
 	--fold
 	{
 		"milisims/foldhue.nvim",
-		event="VeryLazy",
+		event = "VeryLazy",
 		config = function()
 			require("foldhue").enable()
+		end,
+	},
+
+	--illuminate
+	{
+		"RRethy/vim-illuminate",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("illuminate").configure({
+				providers = {
+					"lsp",
+					"treesitter",
+				},
+				iletypes_denylist = {
+					"TelescopePrompt",
+					"TelescopeResults",
+				},
+				min_count_to_highlight = 2,
+				delay = 100,
+			})
 		end,
 	},
 }

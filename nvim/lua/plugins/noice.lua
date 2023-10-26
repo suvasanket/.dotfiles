@@ -19,21 +19,21 @@ return {
 				enabled = true,
 				view = "cmdline", --cmdline/cmdline_popup
 				format = {
-					cmdline = { pattern = "^:", icon = "", lang = "vim", title = "" },
+					cmdline = { pattern = "^:", icon = "", lang = "vim", title = "" },
 					search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
 					search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
 					input = { pattern = "'<,'>s/", icon = "󰬲", title = "" },
 				},
 			},
 			lsp = {
-				hover = { enabled = false },
-				progress = {
-					enabled = true,
-					view = "mini",
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
 				},
 			},
 			messages = {
-				view_search = false,
+				view_search = "virtualtext",
 			},
 			presets = {
 				bottom_search = false,
@@ -51,7 +51,7 @@ return {
 		opts = {
 			fps = 50,
 			background_colour = "#182912",
-			timeout = 5000,
+			timeout = 4000,
 			max_height = function()
 				return math.floor(vim.o.lines * 0.75)
 			end,
@@ -63,11 +63,11 @@ return {
 			stages = "fade_in_slide_out",
 			top_down = true,
 			icons = {
-				DEBUG = "",
-				ERROR = "",
-				INFO = "",
-				TRACE = "✎",
-				WARN = "",
+				DEBUG = " ",
+				ERROR = "󱙝 ",
+				INFO = " ",
+				TRACE = " ",
+				WARN = "",
 			},
 		},
 	},
@@ -78,19 +78,22 @@ return {
 	--dressing
 	{
 		"stevearc/dressing.nvim",
-		event="VeryLazy",
-		init = function()
-			vim.ui.select = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.select(...)
-			end
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.input(...)
-			end
-		end,
+		event = "VeryLazy",
 		opts = {
+			input = {
+				mappings = {
+					n = {
+						["<Esc>"] = "Close",
+						["<CR>"] = "Confirm",
+					},
+					i = {
+						["<C-c>"] = "Close",
+						["<CR>"] = "Confirm",
+						["<C-p>"] = "HistoryPrev",
+						["<C-n>"] = "HistoryNext",
+					},
+				},
+			},
 			select = {
 				get_config = function(opts)
 					if opts.kind == "codeaction" then
