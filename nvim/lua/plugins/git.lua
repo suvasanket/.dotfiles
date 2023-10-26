@@ -1,61 +1,4 @@
 return {
-	--neogit
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"sindrets/diffview.nvim",
-		},
-		keys = {
-			{ "<leader>gg", "<cmd>Neogit cwd=%:p:h<cr>", desc = "Neogit" },
-		},
-		opts = {
-			disable_hint = true,
-			signs = {
-				hunk = { " ", " " },
-				item = { " ", " " },
-				section = { " ", " " },
-			},
-			sections = {
-				-- Reverting/Cherry Picking
-				sequencer = {
-					folded = true,
-				},
-				untracked = {
-					folded = true,
-				},
-				unstaged = {
-					folded = true,
-				},
-				staged = {
-					folded = true,
-				},
-				stashes = {
-					folded = true,
-				},
-				unpulled_upstream = {
-					folded = true,
-				},
-				unmerged_upstream = {
-					folded = true,
-				},
-				unpulled_pushRemote = {
-					folded = true,
-				},
-				unmerged_pushRemote = {
-					folded = true,
-				},
-				recent = {
-					folded = true,
-				},
-				rebase = {
-					folded = true,
-				},
-			},
-		},
-	},
-
 	--gitsigns
 	{
 		"lewis6991/gitsigns.nvim",
@@ -74,5 +17,5 @@ return {
 	},
 
 	--fugitive
-	{ "tpope/vim-fugitive", cmd = { "G" }, enabled = false },
+	{ "tpope/vim-fugitive", cmd = { "G" }, enabled = true },
 }

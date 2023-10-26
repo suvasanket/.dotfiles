@@ -2,9 +2,9 @@ return {
 	{
 		"nvim-neorg/neorg",
 		ft = "norg",
-		cmd = { "Neorg" },
 		keys = {
-			{ "<leader>nn", "<cmd>Neorg index<cr>", desc = { "New note" } },
+			{ "<leader>ni", "<cmd>Neorg index<cr>", desc = { "New note" } },
+			{ "<leader>nn", "<cmd>Neorg<cr>", desc = { "Neorg Menu" } },
 			{ "<leader>nq", "<cmd>Neorg return<cr>", desc = { "Quit note" } },
 		},
 		build = ":Neorg sync-parsers",

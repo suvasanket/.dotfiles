@@ -60,7 +60,7 @@ map("n", "zx", function()
 end)
 map("t", "<C-[>", "<C-\\><C-n>")
 map("x", "<C-c>", "<ESC>")
-map("n", "<leader>bf", "gg=G", { desc = "buffer format" })
+map("n", "<leader>bf", "gg=G<C-o>", { desc = "buffer format" })
 map("n", "<C-t>", cmd("bnext"))
 map("n", "<S-C-t>", cmd("bprevious"))
 

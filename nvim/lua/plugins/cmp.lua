@@ -13,7 +13,7 @@ return {
 			{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 			{
 				"Exafunction/codeium.nvim",
-				event = "BufRead",
+				event = "InsertEnter",
 				config = function()
 					require("codeium").setup({})
 				end,

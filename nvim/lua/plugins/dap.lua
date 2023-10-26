@@ -5,6 +5,17 @@ return {
 		dependencies = {
 			{ "rcarriga/nvim-dap-ui" },
 			{ "theHamsta/nvim-dap-virtual-text", opts = {} },
+			{
+				"jay-babu/mason-nvim-dap.nvim",
+				opts = {
+					automatic_setup = true,
+					handlers = {
+						function(config)
+							require("mason-nvim-dap").default_setup(config)
+						end,
+					},
+				},
+			},
 		},
 		--stylua: ignore
 		keys = {

@@ -6,7 +6,7 @@ return {
 	{
 		"nvim-tree/nvim-web-devicons",
 		opts = { override_by_extension = {
-			["norg"] = { icon = "󰂺", color = "#D2E3C8" , name = "Norg" },
+			["norg"] = { icon = "󰂺", color = "#A2678A", name = "Norg" },
 		} },
 	},
 }

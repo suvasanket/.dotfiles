@@ -35,7 +35,7 @@ c([[
 --appearance
 vim.cmd.colorscheme("rose-pine")
 o.termguicolors = true
-o.signcolumn = "yes"
+o.signcolumn = "auto"
 o.hlsearch = false
 o.fillchars = "fold: ,eob: "
 

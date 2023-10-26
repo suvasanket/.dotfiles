@@ -60,7 +60,7 @@ autocmd("FileType", {
 		"help",
 		"man",
 		"lspinfo",
-		"trouble",
+		"fugitive",
 		"crunner",
 		"quickfix",
 	},
