@@ -44,7 +44,7 @@ return {
 		keys = {
 			{ "<leader>g0", "<cmd>Gitsigns reset_buffer<cr>", desc = "git reset buffer" },
 			{ "<leader>ga", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "git blame" },
-			{ "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", mode = { "v", "i" }, desc = "git stage hunk" },
+			{ "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", mode = { "v", "n" }, desc = "git stage hunk" },
 		},
 		opts = {
 			signcolumn = true,
