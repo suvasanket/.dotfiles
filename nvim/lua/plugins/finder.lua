@@ -156,6 +156,7 @@ return {
 						["-"] = "open_split",
 						["|"] = "open_vsplit",
 						["/"] = "none",
+
 					},
 				},
 			},
