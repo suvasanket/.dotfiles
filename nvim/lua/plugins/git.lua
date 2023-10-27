@@ -24,10 +24,6 @@ return {
 				section = { " ", " " },
 			},
 			sections = {
-				-- Reverting/Cherry Picking
-				sequencer = {
-					folded = true,
-				},
 				untracked = {
 					folded = true,
 				},
@@ -35,27 +31,6 @@ return {
 					folded = true,
 				},
 				staged = {
-					folded = true,
-				},
-				stashes = {
-					folded = true,
-				},
-				unpulled_upstream = {
-					folded = true,
-				},
-				unmerged_upstream = {
-					folded = true,
-				},
-				unpulled_pushRemote = {
-					folded = true,
-				},
-				unmerged_pushRemote = {
-					folded = true,
-				},
-				recent = {
-					folded = true,
-				},
-				rebase = {
 					folded = true,
 				},
 			},
