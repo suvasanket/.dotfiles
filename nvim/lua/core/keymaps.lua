@@ -75,6 +75,10 @@ map(
 	'<cmd>lcd%:p:h<cr><cmd>lua require("lazy.util").float_term({ "lazygit" }, { interactive = true })<cr>',
 	{ desc = "lazygit" }
 )
+map("n", "<leader>gr", function()
+	local user_input = vim.fn.input("url:")
+	vim.cmd("G remote add origin " .. user_input)
+end, { desc = "git add remote" })
 
 --helix
 map("n", "gl", "$")

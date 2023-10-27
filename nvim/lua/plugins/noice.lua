@@ -5,7 +5,6 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{ ":" },
-			{ "<leader>ms", "<cmd>Noice<cr>", desc = "messages" },
 		},
 		opts = {
 			views = {

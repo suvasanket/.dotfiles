@@ -20,10 +20,8 @@ return {
 			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "git branches" },
 			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "git files" },
 			{ "<M-x>" ,"<cmd>Telescope<cr>"},
-			{"<leader>no",function ()
-					vim.cmd "vsplit"
-					require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } })
-			end, desc = "Neorg file open"}
+			{ "<leader>ms", function () require("telescope").extensions.notify.notify({ layout_config = { preview_width = 0.6 } }) end, desc = "Messages" },
+			{ "<leader>no",function () vim.cmd "vsplit" require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } }) end, desc = "Neorg file open"}
 		},
 		config = function()
 			require("telescope").setup({
