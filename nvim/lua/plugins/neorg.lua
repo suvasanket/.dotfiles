@@ -23,6 +23,7 @@ return {
 				["core.integrations.treesitter"] = {},
 				["core.concealer"] = {
 					config = {
+						folds = false,
 						icon_preset = "varied",
 						icons = {
 							code_block = {

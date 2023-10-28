@@ -115,7 +115,7 @@ o.scrolloff = 17
 
 --indent
 o.autoindent = true
-o.smartindent = false
+o.smartindent = true
 
 --format
 o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -127,3 +127,5 @@ o.ruler = false
 --conceal
 o.conceallevel = 2
 o.concealcursor = "n"
+
+o.hidden = false

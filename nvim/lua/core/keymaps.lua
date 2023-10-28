@@ -49,15 +49,15 @@ map("c", "<C-a>", "<home>")
 map("c", "<C-e>", "<end>")
 
 --buffer
-map("n", "zx", function()
-	if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then
-		vim.cmd("Alpha")
-		vim.cmd("bdelete! #")
-	else
-		-- vim.cmd.w()
-		vim.cmd.bdelete()
-	end
-end)
+-- map("n", "zx", function()
+-- 	if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then
+-- 		vim.cmd("Alpha")
+-- 		vim.cmd("bdelete! #")
+-- 	else
+-- 		-- vim.cmd.w()
+-- 		vim.cmd.bdelete()
+-- 	end
+-- end)
 map("t", "<C-[>", "<C-\\><C-n>")
 map("x", "<C-c>", "<ESC>")
 map("n", "<leader>bf", "gg=G<C-o>", { desc = "buffer format" })

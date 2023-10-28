@@ -20,7 +20,6 @@ return {
 			},
 		},
 		config = function()
-			vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#191717", blend = 09 })
 			local cmp = require("cmp")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -31,15 +30,15 @@ return {
 						mode = "symbol",
 						maxwidth = 70,
 						menu = {
-							nvim_lsp = "[l]",
-							treesitter = "[t]",
-							path = "[p]",
-							buffer = "[b]",
-							zsh = "[z]",
-							luasnip = "[s]",
-							cmdline = "[c]",
-							codeium = "[c]",
-							neorg = "[n]",
+							nvim_lsp = "(l)",
+							treesitter = "(t)",
+							path = "(p)",
+							buffer = "(b)",
+							zsh = "(z)",
+							luasnip = "(s)",
+							cmdline = "(c)",
+							codeium = "(c)",
+							neorg = "(n)",
 						},
 					}),
 				},
@@ -58,11 +57,9 @@ return {
 				window = {
 					completion = {
 						border = "rounded",
-						-- winhighlight = "Normal:CmpNormal",
 					},
 					documentation = {
 						border = "rounded",
-						-- winhighlight = "Normal:CmpDocNormal",
 					},
 				},
 				experimental = {

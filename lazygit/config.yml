@@ -87,6 +87,8 @@ git:
   disableForcePushing: false
   parseEmoji: false
 os:
+  # editCommand: 'nvim'
+  # editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
   open: 'open {{filename}}'
   copyToClipboardCmd: '' # See 'Custom Command for Copying to Clipboard' section
   editPreset: '' # see 'Configuring File Editing' section

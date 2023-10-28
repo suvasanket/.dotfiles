@@ -54,10 +54,17 @@ return {
 					},
 					builtin = {
 						theme = "ivy",
+						border = false,
 						previewer = false,
 						prompt_title = false,
 						results_title = "Commands",
 						prompt_prefix = " ",
+						layout_config = {
+							height = 0.4,
+						},
+					},
+					git_commits = {
+						theme = "dropdown",
 						layout_config = {
 							height = 0.4,
 						},
@@ -157,7 +164,6 @@ return {
 						["-"] = "open_split",
 						["|"] = "open_vsplit",
 						["/"] = "none",
-
 					},
 				},
 			},
