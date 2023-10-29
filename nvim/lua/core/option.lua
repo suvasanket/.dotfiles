@@ -37,7 +37,16 @@ vim.cmd.colorscheme("rose-pine")
 o.termguicolors = true
 o.signcolumn = "auto"
 o.hlsearch = false
-o.fillchars = "fold: ,eob: "
+o.fillchars = {
+	fold = " ",
+	eob = " ",
+}
+o.listchars = {
+	tab = "│  ",
+	eol = "󱞥",
+	-- trail = "-",
+	-- nbsp = "+",
+}
 
 --fold
 o.foldmethod = "manual"
@@ -59,7 +68,7 @@ function! MyFoldText()
     let indentation = GetSpaces(foldlevel("."))
     let spaces = repeat(" ", 200)
 
-    let str = indentation . startLineText . ".." . spaces
+    let str = indentation . startLineText
 
     return str
 endfunction
@@ -88,6 +97,7 @@ o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
 
 --tab indent
 o.tabstop = 4
+o.shiftwidth = 4
 o.softtabstop = 4
 o.wrap = false
 o.list = false
@@ -115,7 +125,7 @@ o.scrolloff = 17
 
 --indent
 o.autoindent = true
-o.smartindent = true
+o.smartindent = false
 
 --format
 o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -129,3 +139,5 @@ o.conceallevel = 2
 o.concealcursor = "n"
 
 o.hidden = false
+
+vim.g.EasyClipAutoFormat = 1

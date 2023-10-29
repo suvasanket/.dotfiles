@@ -18,10 +18,19 @@ local field_format = {
 return {
 	"b0o/incline.nvim",
 	enabled = true,
-	event = "VeryLazy",
 	config = function()
 		require("incline").setup({
 			render = function(props)
+				if not props.focused then
+					return ""
+				end
+
+				local count = vim.fn.searchcount({ recompute = 1, maxcount = -1 })
+				local contents = vim.fn.getreg("/")
+				if string.len(contents) == 0 then
+					return ""
+				end
+
 				local buffullname = vim.api.nvim_buf_get_name(props.buf)
 				local bufname_t = vim.fn.fnamemodify(buffullname, ":t")
 				local bufname = (bufname_t and bufname_t ~= "") and bufname_t or "[No Name]"
@@ -49,14 +58,18 @@ return {
 				local modified_icon = {}
 				if vim.api.nvim_get_option_value("modified", { buf = props.buf }) then
 					modified_icon = vim.tbl_extend("force", { "● " }, field_format.modified)
-					-- display_bufname.guifg = field_format.modified.guifg
+					display_bufname.guifg = field_format.modified.guifg
 				end
 
-				return {
-					devicon,
-					display_bufname,
-					modified_icon,
-				}
+				if vim.fn.winnr("$") > 1 and #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
+					return {
+						devicon,
+						display_bufname,
+						modified_icon,
+					}
+				else
+					return ""
+				end
 			end,
 			hide = {
 				cursorline = false,

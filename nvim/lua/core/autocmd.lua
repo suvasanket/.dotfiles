@@ -16,7 +16,7 @@ autocmd("VimEnter", {
 		hl("SagaLightBulb", { fg = "#FFD93D" })
 		hl("SagaBeacon", { bg = "#29a4bd" })
 		hl("LspSagaFinderSelection", { fg = "#61677A" })
-		hl("CursorLine", { blend = 12 })
+		hl("CursorLine", { blend = 3 })
 		hl("Folded", { fg = "#7D7C7C" })
 		hl("NeogitFold", { bg = "NONE" })
 		hl("Search", { bg = "#4F4557" })
@@ -62,7 +62,7 @@ autocmd("FileType", {
 		"lspinfo",
 		"fugitive",
 		"crunner",
-		"quickfix",
+		"qf",
 	},
 	callback = function(event)
 		vim.opt_local.wrap = false

@@ -70,38 +70,4 @@ return {
 			},
 		},
 	},
-
-	--nui
-	{ "MunifTanjim/nui.nvim", lazy = true },
-
-	--dressing
-	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
-		opts = {
-			input = {
-				mappings = {
-					n = {
-						["<Esc>"] = "Close",
-						["<CR>"] = "Confirm",
-					},
-					i = {
-						["<C-c>"] = "Close",
-						["<CR>"] = "Confirm",
-						["<C-p>"] = "HistoryPrev",
-						["<C-n>"] = "HistoryNext",
-					},
-				},
-			},
-			select = {
-				get_config = function(opts)
-					if opts.kind == "codeaction" then
-						return {
-							telescope = require("telescope.themes").get_cursor(),
-						}
-					end
-				end,
-			},
-		},
-	},
 }

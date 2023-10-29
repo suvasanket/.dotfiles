@@ -2,16 +2,18 @@ return {
 	--Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = {},
+		dependencies = {
+			"danielfalk/smart-open.nvim",
+			"nvim-telescope/telescope-fzy-native.nvim",
+		},
 		--stylua: ignore
 		keys = {
 			{ "<leader>-", function () vim.cmd("split") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "split" },
 			{ "<leader>|", function () vim.cmd("vsplit") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "vsplit" },
 			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "RecentFile" },
 			{ "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Project" },
-			{ "<leader>ff","<cmd>Telescope find_files<cr>", desc = "Find_file" },
+			{ "<C-f>","<cmd>Telescope smart_open<cr>", desc = "Find_file" },
 			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
 			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
 			{ "<leader>bg", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
@@ -40,7 +42,7 @@ return {
 					selection_caret = "󰁕 ",
 					mappings = {
 						i = {
-							["<C-[>"] = require("telescope.actions").close,
+							["<C-\\>"] = require("telescope.actions").close,
 							["<C-j>"] = "move_selection_next",
 							["<C-k>"] = "move_selection_previous",
 						},
@@ -86,9 +88,21 @@ return {
 						},
 					},
 				},
-				extensions = {},
+				extensions = {
+					smart_open = {
+						layout_config = {
+							width = 0.6,
+						},
+						show_scores = false,
+						ignore_patterns = { "*.git/*", "*/tmp/*" },
+						match_algorithm = "fzy",
+						disable_devicons = false,
+					},
+				},
 			})
 			require("telescope").load_extension("projects")
+			require("telescope").load_extension("smart_open")
+			require("telescope").load_extension("fzy_native")
 		end,
 	},
 
