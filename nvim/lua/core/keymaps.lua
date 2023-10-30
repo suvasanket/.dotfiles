@@ -16,9 +16,13 @@ map("n", "<S-tab>", "zi")
 map("n", "<leader>bc", cmd("lcd%:p:h<cr>:echo 'current dir is now ' . getcwd()"), { desc = "cd_to_current_buffer" })
 map("n", "<leader>bC", ":e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.lua<CR>", { desc = "ftplugin" })
 
---insert
+--mac
 map("i", "<M-BS>", "<C-W>")
 map("i", "<D-BS>", "<C-U>")
+map("n", "<D-`>", "<C-o>")
+map("n", "<S-D-`>", "<C-i>")
+
+--insert
 map("i", "<C-h>", "<left>")
 map("i", "<C-j>", "<down>")
 map("i", "<C-k>", "<up>")

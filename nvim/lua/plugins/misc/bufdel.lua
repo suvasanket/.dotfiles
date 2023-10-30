@@ -1,7 +1,7 @@
 return {
 	"ojroques/nvim-bufdel",
 	keys = {
-		{ "zx", "<cmd>BufDel!<cr>", desc = "buffer delete" },
+		{ "<D-w>", "<cmd>BufDel!<cr>", desc = "buffer delete" },
 		{ "zX", "<cmd>BufDelOthers!<cr>", desc = "buffer delete others" },
 	},
 	opts = {

@@ -30,6 +30,7 @@ return {
 				b = { name = "+buffer" },
 				n = { name = "+notes" },
 				f = { name = "+find" },
+				m = { name = "+refactor" },
 				k = "signature_help",
 			},
 			["g"] = {

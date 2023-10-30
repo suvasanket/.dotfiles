@@ -16,7 +16,7 @@ return {
 			{ "<C-f>","<cmd>Telescope smart_open<cr>", desc = "Find_file" },
 			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
 			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
-			{ "<leader>bg", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
+			{ "<D-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
 			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
 			{ "<leader>wg", "<cmd>Telescope grep_string<cr>", desc = "Live_grep" },
 			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "git branches" },
@@ -42,7 +42,7 @@ return {
 					selection_caret = "󰁕 ",
 					mappings = {
 						i = {
-							["<C-\\>"] = require("telescope.actions").close,
+							["<C-[>"] = require("telescope.actions").close,
 							["<C-j>"] = "move_selection_next",
 							["<C-k>"] = "move_selection_previous",
 						},
@@ -97,6 +97,11 @@ return {
 						ignore_patterns = { "*.git/*", "*/tmp/*" },
 						match_algorithm = "fzy",
 						disable_devicons = false,
+						mappings = {
+							i = {
+								["<C-f>"] = require("telescope.actions").close,
+							},
+						},
 					},
 				},
 			})
