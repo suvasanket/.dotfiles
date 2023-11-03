@@ -3,18 +3,39 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			"danielfalk/smart-open.nvim",
-			"nvim-telescope/telescope-fzy-native.nvim",
+			{ "nvim-telescope/telescope-frecency.nvim" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		--stylua: ignore
 		keys = {
-			{ "<leader>-", function () vim.cmd("split") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "split" },
-			{ "<leader>|", function () vim.cmd("vsplit") if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then vim.cmd("Telescope find_files") else vim.cmd("Telescope buffers") end end, desc = "vsplit" },
-			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "RecentFile" },
 			{ "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
-			{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Project" },
-			{ "<C-f>","<cmd>Telescope smart_open<cr>", desc = "Find_file" },
-			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" },path_display={"tail"} }) end, desc = "Config_file" },
+			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Oldfiles" },
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Findfiles" },
+			{ "<D-j>", function()
+				require("telescope").extensions.projects.projects({
+					attach_mappings = function(_, map)
+						map({"i", "n"}, "<D-j>", function()
+							vim.cmd("q!")
+						end)
+						return true
+					end,
+					layout_config = { width = 0.6, height = 0.4 },
+				})
+			end, desc = "Project" },
+			{ "<C-f>", function()
+				require("telescope").extensions.frecency.frecency({
+					attach_mappings = function(_, map)
+						map({"i", "n"}, "<C-f>", function()
+							vim.cmd("q!")
+						end)
+						return true
+					end,
+					previewer = false,
+					results_title="",
+					layout_config = { width = 0.6, height = 0.4 },
+				})
+			end, desc = "Find_file" },
+			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" }, path_display={ "tail" } }) end, desc = "Config_file" },
 			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
 			{ "<D-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
 			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
@@ -23,12 +44,13 @@ return {
 			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "git files" },
 			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "git commits" },
 			{ "<M-x>" ,"<cmd>Telescope<cr>"},
-			{ "<leader>ms", function () require("telescope").extensions.notify.notify({ layout_config = { preview_width = 0.6 } }) end, desc = "Messages" },
-			{ "<leader>no",function () vim.cmd "vsplit" require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } }) end, desc = "Neorg file open"}
+			{ "<leader>ms", function () require("telescope").extensions.notify.notify({initial_mode = "normal", layout_config = { preview_width = 0.6 } }) end, desc = "Messages" },
+			{ "<leader>no", function () vim.cmd "vsplit" require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } }) end, desc = "Neorg file open" }
 		},
 		config = function()
 			require("telescope").setup({
 				defaults = {
+					borderchars = { "⎻", "│", "─", "│", "╭", "╮", "╯", "╰" },
 					layout_strategy = "horizontal",
 					layout_config = {
 						height = 0.8,
@@ -37,10 +59,12 @@ return {
 						},
 					},
 					sorting_strategy = "ascending",
-					--- other configs
-					prompt_prefix = " ",
+					prompt_prefix = " ",
 					selection_caret = "󰁕 ",
 					mappings = {
+						n = {
+							["q"] = require("telescope.actions").close,
+						},
 						i = {
 							["<C-[>"] = require("telescope.actions").close,
 							["<C-j>"] = "move_selection_next",
@@ -51,7 +75,7 @@ return {
 				pickers = {
 					find_files = {
 						previewer = true,
-						hidden = true,
+						hidden = false,
 						file_ignore_patterns = { "*/node_modules/*", "*/.git/*" },
 					},
 					builtin = {
@@ -87,27 +111,20 @@ return {
 							preview_width = 0.6,
 						},
 					},
-				},
-				extensions = {
-					smart_open = {
+					oldfiles = {
+						previewer = false,
+						prompt_title = "recent files",
+						results_title = "",
 						layout_config = {
-							width = 0.6,
-						},
-						show_scores = false,
-						ignore_patterns = { "*.git/*", "*/tmp/*" },
-						match_algorithm = "fzy",
-						disable_devicons = false,
-						mappings = {
-							i = {
-								["<C-f>"] = require("telescope.actions").close,
-							},
+							height = 0.4,
+							width = 0.5,
 						},
 					},
 				},
+				extensions = {},
 			})
 			require("telescope").load_extension("projects")
-			require("telescope").load_extension("smart_open")
-			require("telescope").load_extension("fzy_native")
+			require("telescope").load_extension("fzf")
 		end,
 	},
 

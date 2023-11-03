@@ -1,11 +1,14 @@
 add_newline = false
 
-# format="""$character"""
+# format="""
+# $character 
+# $custom
+# """
 # right_format = """$all"""
 
 [character]
 error_symbol = '[](yellow)'
-success_symbol = '[](#78D6C6)'
+success_symbol = '[➫](#78D6C6)'
 
 [directory]
 style="#D4ADFC"
@@ -16,7 +19,7 @@ charging_symbol = ' ⚡️ '
 discharging_symbol = '󱟞 '
 
 [[battery.display]]
-threshold = 25
+threshold = 30
 style = '#C70039'
 discharging_symbol = '󱃍 '
 

@@ -7,9 +7,9 @@
 #: characters.
 
 font_family      CaskaydiaCove Nerd Font
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
+# bold_font        CaskaydiaCove Nerd Font Bold
+# italic_font      CaskaydiaCove Nerd Font Italic
+# bold_italic_font CaskaydiaCove Nerd Font Bold Italic
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -24,7 +24,7 @@ bold_italic_font auto
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-font_size 16.0
+font_size 15.0
 
 #: Font size (in pts)
 
@@ -247,7 +247,7 @@ font_size 16.0
 #: special keyword: background. Note that if cursor is set to none
 #: then this option is ignored.
 
-cursor_shape block
+# cursor_shape block
 
 #: The cursor shape can be one of block, beam, underline. Note that
 #: when reloading the config this will be changed only if the cursor
@@ -798,8 +798,7 @@ placement_strategy center
 #: this option. Using a value of center means the cell area will be
 #: placed centrally. A value of top-left means the padding will be
 #: only at the bottom and right edges.
-
-# active_border_color #00ff00
+# active_border_color #c4a7e7
 
 #: The color for the border of the active window. Set this to none to
 #: not draw borders around the active window.
@@ -911,7 +910,7 @@ tab_bar_edge bottom
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-tab_bar_style fade
+tab_bar_style powerline
 
 #: The tab bar style, can be one of:
 
@@ -955,7 +954,7 @@ tab_bar_style fade
 #: closed tab. A value of right will switch to the tab to the right of
 #: the closed tab. A value of last will switch to the right-most tab.
 
-# tab_fade 0.25 0.5 0.75 1
+# tab_fade 0.2 0.4 0.6 0.8 1
 
 #: Control how each tab fades into the background when using fade for
 #: the tab_bar_style. Each number is an alpha (between zero and one)
@@ -1033,12 +1032,12 @@ tab_title_max_length 10
 
 #: Template to use for active tabs. If not specified falls back to
 #: tab_title_template.
-# active_tab_foreground   #DFD7BF
-# active_tab_background   #7D7463
-active_tab_font_style    normal #bold-italic
-# inactive_tab_foreground #B9B4C7
-# inactive_tab_background #5C5470
-# inactive_tab_font_style normal
+# inactive_tab_foreground   #E5D1FA
+# inactive_tab_background   #5C5470
+active_tab_font_style   bold-italic #normal
+# active_tab_foreground #E5D1FA
+# active_tab_background #917FB3
+inactive_tab_font_style normal
 
 #: Tab bar colors and styles.
 
@@ -1063,7 +1062,7 @@ active_tab_font_style    normal #bold-italic
 
 #: The foreground and background colors.
 
-background_opacity 0.85
+background_opacity 0.93
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -1601,7 +1600,7 @@ map cmd+m toggle_layout stack
 
 map shift+ctrl+t no_op
 map cmd+enter --cwd=current --type=window
-map cmd+t launch --cwd=current --type=tab
+map cmd+n launch --cwd=current --type=tab
 map cmd+l next_layout
 map shift+cmd+l last_used_layout
 map cmd+] next_tab
@@ -1711,7 +1710,7 @@ listen_on unix:/tmp/mykitty
 #: create mappings to launch a new tab in the current working
 #: directory without duplication::
 
-map f1 launch sh -c "nvim"
+# map f1 launch sh -c "nvim"
 #:     map f2 launch_tab emacs
 
 #: Similarly, to alias kitten invocation::
@@ -1908,7 +1907,7 @@ map shift+cmd+t       new_os_window
 #: Close window
 
 # map kitty_mod+w close_window
-map cmd+w close_window
+map shift+cmd+w close_window
 
 #: Next window
 
@@ -2027,7 +2026,9 @@ map cmd+\       close_tab
 
 #: Close OS window
 
-# map shift+cmd+w close_os_window
+map cmd+w no_op
+map cmd+f1 launch --cwd=current --type=tab nvim
+# map shift+ctrl+w close_os_window
 
 #: Move tab forward
 
@@ -2364,6 +2365,6 @@ map shift+cmd+m minimize_macos_window
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Mocha
+# Rosé Pine
 include current-theme.conf
 # END_KITTY_THEME

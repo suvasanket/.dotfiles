@@ -8,8 +8,4 @@ return {
 		event = "VeryLazy",
 		dependencies = { "tpope/vim-repeat" },
 	},
-	{
-		"svermeulen/vim-easyclip",
-		event = "VeryLazy",
-	},
 }

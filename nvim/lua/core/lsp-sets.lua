@@ -11,15 +11,11 @@ capabilities.textDocument.foldingRange = {
 
 --lsp-virtualText_prefix--
 vim.diagnostic.config({
-	-- virtual_text = {
-	-- 	prefix = "",
-	-- },
+	virtual_text = {
+		prefix = "",
+	},
 	update_in_insert = true,
 	severity_sort = true,
-})
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	-- Use a sharp border with `FloatBorder` highlights
-	border = "rounded",
 })
 
 --lsp-gutterSigns--

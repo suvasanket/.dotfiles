@@ -18,6 +18,7 @@ local field_format = {
 return {
 	"b0o/incline.nvim",
 	enabled = true,
+	event = "BufAdd",
 	config = function()
 		require("incline").setup({
 			render = function(props)

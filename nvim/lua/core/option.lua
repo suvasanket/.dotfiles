@@ -87,12 +87,12 @@ o.backup = false
 o.undodir = os.getenv("HOME") .. "/dev/undodir"
 o.undofile = true
 o.updatetime = 50
-o.autochdir = false
+o.autochdir = true
 
 --line and cursor
 o.relativenumber = true
 o.number = true
-o.cursorline = true
+o.cursorline = false
 o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
 
 --tab indent
@@ -131,7 +131,7 @@ o.smartindent = false
 o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 --status line
-o.laststatus = 0
+-- o.laststatus = 0
 o.ruler = false
 
 --conceal

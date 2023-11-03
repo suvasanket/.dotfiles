@@ -1,17 +1,18 @@
 return {
 	--lua plugins that are other to use
-	{ "nvim-lua/plenary.nvim", lazy = true },
+	{ "nvim-lua/plenary.nvim", event = "VeryLazy" },
 
 	--web devicons
 	{
 		"nvim-tree/nvim-web-devicons",
+		event = "VimEnter",
 		opts = {
 			override_by_extension = { ["norg"] = { icon = "󰂺", color = "#A2678A", name = "Norg" } },
 		},
 	},
 
 	--nui
-	{ "MunifTanjim/nui.nvim", lazy = true },
+	{ "MunifTanjim/nui.nvim", event = "VeryLazy" },
 
 	--dressing
 	{
@@ -45,5 +46,5 @@ return {
 	},
 
 	--sql lite
-	{ "kkharji/sqlite.lua" },
+	{ "kkharji/sqlite.lua", event = "VeryLazy" },
 }

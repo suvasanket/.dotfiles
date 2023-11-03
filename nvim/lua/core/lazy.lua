@@ -15,6 +15,9 @@ vim.g.mapleader = " "
 require("lazy").setup({
 	{ import = "plugins" },
 	{ import = "plugins.misc" },
+	{ import = "plugins.ui" },
+	{ import = "plugins.edit" },
+	{ import = "plugins.lsp" },
 	--ui = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
 })
 
