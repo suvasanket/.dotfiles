@@ -1,9 +1,27 @@
-return{
+return {
 	"goolord/alpha-nvim",
 	event = "VimEnter",
+	dependencies = { "MaximilianLloyd/ascii.nvim" },
 	pin = true,
-	config = function()
-		require("alpha.themes.dashboard").section.footer.val = require("alpha.fortune")()
-		require("alpha").setup(require("alpha.themes.startify").opts)
+	config = function(_, startify)
+		-- close Lazy and re-open when the dashboard is ready
+		if vim.o.filetype == "lazy" then
+			vim.cmd.close()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "AlphaReady",
+				callback = function()
+					require("lazy").show()
+				end,
+			})
+		end
+
+		require("alpha").setup(startify.opts)
+	end,
+	opts = function()
+		local startify = require("alpha.themes.startify")
+		startify.section.header.val = require("ascii").get_random_global()
+		startify.section.top_buttons.val = { nil }
+		-- startify.section.top_buttons.val = require'alpha.fortune'()
+		return startify
 	end,
 }

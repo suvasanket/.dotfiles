@@ -5,13 +5,15 @@ return {
 		local thyme = require("lualine.themes.codedark")
 		local colors = {
 			color1 = "#80a0ff",
-			color2 = "#B6FFFA",
+			color2 = "#C8E4B2",
 			color4 = "#080808", --black
 			white = "#DFCCFB", --white
 			red = "#ff5189", --red
-			violet = "#FF9B50", --voilet
+			neon = "#45FFCA", --voilet
 			grey = "#A8A196", --grey
 			none = "NONE",
+			nbg = "#352F44",
+			ibg = "#1A120B",
 		}
 
 		thyme = {
@@ -21,7 +23,11 @@ return {
 				c = { fg = colors.grey, bg = colors.none },
 			},
 
-			insert = { a = { fg = colors.violet, bg = colors.none } },
+			insert = {
+				a = { fg = colors.neon, bg = colors.none },
+				b = { fg = colors.white, bg = colors.none },
+				c = { fg = colors.grey, bg = colors.none },
+			},
 			visual = { a = { fg = colors.red, bg = colors.none } },
 			replace = { a = { fg = colors.color1, bg = colors.none } },
 
@@ -50,30 +56,33 @@ return {
 
 			sections = {
 				lualine_a = {
-					function ()
-						return""
-					end,
-					{ "mode" },
-				},
-				lualine_b = {
-					-- { "overseer" },
-					{ require("recorder").recordingStatus },
-				},
-				lualine_c = {
-					"branch",
-					"diff",
 					function()
-						return "%="
+						return "▊"
 					end,
 					{
-						"filetype",
-						colored = true,
-						icon_only = true,
-						icon = { align = "right" },
+						"mode",
+						fmt = function(str)
+							if str:sub(1, 1) == "N" then
+								return " "
+							elseif str:sub(1, 1) == "I" then
+								return "󰙏 "
+							elseif str:sub(1, 1) == "V" then
+								return "󰗘 "
+							elseif str:sub(1, 1) == "T" then
+								return " "
+							elseif str:sub(1, 1) == "S" then
+								return "󰪷 "
+							elseif str:sub(1, 1) == "C" then
+								return " "
+							elseif str:sub(1, 1) == "O" then
+								return "󰞌 "
+							end
+							return "[" .. str:sub(1, 1) .. "]"
+						end,
 					},
 					{
 						"filename",
-						path = 3,
+						path = 1,
 						shorting_target = 40,
 						symbols = {
 							modified = "󰳻",
@@ -83,16 +92,30 @@ return {
 						},
 					},
 				},
-				lualine_x = {
+				lualine_b = {
+					{ require("recorder").recordingStatus },
+				},
+				lualine_c = {
+					"branch",
+					"diff",
 					{
 						"diagnostics",
 						symbols = { error = " ", warn = " ", info = " " },
 					},
 				},
-				lualine_y = {},
-				lualine_z = {
+				lualine_x = {
 					"encoding",
 					"filesize",
+				},
+				lualine_y = {
+					{
+						"filetype",
+						colored = true,
+						icon_only = false,
+						icon = { align = "left" },
+					},
+				},
+				lualine_z = {
 					-- Lsp server name .
 					{
 						function()
@@ -105,17 +128,20 @@ return {
 							for _, client in ipairs(clients) do
 								local filetypes = client.config.filetypes
 								if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-									return client.name
+									return "󰒍 " .. client.name
 								end
 							end
 							return msg
 						end,
 					},
+					function()
+						return "▊"
+					end,
 				},
 			},
 			tabline = {},
 			inactive_winbar = {},
-			extensions = { "nvim-tree", "fugitive", "nvim-dap-ui", "lazy", "overseer" },
+			extensions = { "nvim-tree", "fugitive", "nvim-dap-ui", "lazy" },
 		})
 	end,
 }

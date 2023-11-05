@@ -9,10 +9,10 @@ return {
 	},
 	opts = {
 		keymaps = {
-			normal = "s",
-			normal_cur = "ss",
-			normal_line = "S",
-			normal_cur_line = "SS",
+			normal = "ys",
+			normal_cur = "yss",
+			normal_line = "yS",
+			normal_cur_line = "ySS",
 			viual = "<C-g>s",
 			visual_line = "<C-g>s",
 			delete = "ds",

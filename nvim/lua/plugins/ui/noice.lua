@@ -3,9 +3,6 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		keys = {
-			{ ":" },
-		},
 		opts = {
 			views = {
 				mini = {
@@ -16,9 +13,9 @@ return {
 			},
 			cmdline = {
 				enabled = true,
-				view = "cmdline", --cmdline/cmdline_popup
+				view = "cmdline_popup", --cmdline/cmdline_popup
 				format = {
-					cmdline = { pattern = "^:", icon = "", lang = "vim", title = "" },
+					cmdline = { pattern = "^:", icon = "󰮯", lang = "vim" },
 					search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
 					search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
 					input = { pattern = "'<,'>s/", icon = "󰬲", title = "" },

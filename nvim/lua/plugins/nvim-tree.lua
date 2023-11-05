@@ -82,8 +82,8 @@ return {
 
 			-- custom mappings
 			vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
-			vim.keymap.set("n", "h", api.tree.close, opts("Close"))
-			vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse All"))
+			vim.keymap.set("n", "h", api.tree.change_root_to_parent, opts("Parent"))
+			vim.keymap.set("n", "<S-Tab>", api.tree.collapse_all, opts("Collapse All"))
 		end,
 	},
 }

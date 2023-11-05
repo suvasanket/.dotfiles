@@ -78,14 +78,3 @@ local config = {
 }
 
 jdtls.start_or_attach(config)
-
-require("which-key").register({
-	["<leader>"] = {
-		c = {
-			name = "+code",
-			t = { name = "Test" },
-			e = { name = "Extract" },
-			o = { name = "Organize" },
-		},
-	},
-})

@@ -9,10 +9,24 @@ return {
 			diagnostics = "nvim_lsp",
 			offsets = {
 				{
+					filetype = "OverseerList",
+					text = "Overseer",
+					text_align = "center",
+					highlight = "Label",
+					separator = true,
+				},
+				{
 					filetype = "NvimTree",
 					text = "NvimTree",
 					text_align = "left",
 					highlight = "Directory",
+					separator = true,
+				},
+				{
+					filetype = "undotree",
+					text = "Undotree",
+					text_align = "left",
+					highlight = "Label",
 					separator = true,
 				},
 			},

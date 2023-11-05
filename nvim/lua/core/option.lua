@@ -1,12 +1,5 @@
 local o = vim.opt
 local c = vim.cmd
-local create_command = vim.api.nvim_create_user_command
-
---create command
-create_command("RunCodeEdit", "e ~/.config/nvim/lua/plugins/code_run.lua", {})
-create_command("LspSettings", "e ~/.config/nvim/lua/core/lsp.lua", {})
-create_command("CmpEnable", "lua require('cmp').setup.buffer { enabled = true }", {})
-create_command("CmpDisable", "lua require('cmp').setup.buffer { enabled = false }", {})
 
 -- Fix common typos
 c([[
@@ -131,12 +124,12 @@ o.smartindent = false
 o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 --status line
--- o.laststatus = 0
+o.laststatus = 0
 o.ruler = false
 
 --conceal
 o.conceallevel = 2
-o.concealcursor = "n"
+-- o.concealcursor = "n"
 
 o.hidden = false
 

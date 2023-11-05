@@ -7,7 +7,6 @@ return {
 			{ "<Leader>cci", "<cmd>Lspsaga incoming_calls<CR>", desc = "incoming_calls" },
 			{ "<Leader>cco", "<cmd>Lspsaga outgoing_calls<CR>", desc = "outgoing_calls" },
 			{ "<leader>cpt", "<cmd>Lspsaga peek_type_definition<CR>", desc = "peek_type_definition" },
-			{ "<leader>wd", "<cmd>Lspsaga show_workspace_diagnostics<CR>", desc = "workspaceDiagnostics" },
 			{ "<leader>bd", "<cmd>Lspsaga show_buf_diagnostics<CR>", desc = "bufDiagnostics" },
 			{ "<leader>ca", "<cmd>Lspsaga code_action<CR>", desc = "code_action" },
 			{ "<leader>cr", "<cmd>Lspsaga rename<CR>", desc = "rename" },

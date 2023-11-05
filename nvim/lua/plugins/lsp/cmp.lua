@@ -63,7 +63,7 @@ return {
 					},
 				},
 				experimental = {
-					ghost_text = true,
+					ghost_text = false,
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),

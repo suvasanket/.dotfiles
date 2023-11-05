@@ -21,9 +21,7 @@ return {
 			startinsert = true,
 		},
 		keys = {
-			{ "<leader>rc", "<cmd>RunCode<CR>", desc = "RunCode" },
-			{ "<leader>rf", "<cmd>RunFile<CR>", desc = "RunFile" },
-			{ "<leader>rp", "<cmd>RunProject<CR>", desc = "RunProject" },
+			{ "<leader>r", "<cmd>RunCode<CR>", desc = "RunCode" },
 		},
 	},
 }

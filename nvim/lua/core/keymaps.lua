@@ -44,8 +44,8 @@ map("c", "<C-e>", "<end>")
 -- end)
 map("t", "<C-[>", "<C-\\><C-n>")
 map("n", "<leader>bf", "gg=G<C-o>", { desc = "buffer format" })
-map("n", "<C-t>", cmd("bnext!"))
-map("n", "<S-C-t>", cmd("bprevious!"))
+map("n", "<C-]>", cmd("bnext!"))
+map("n", "<C-[>", cmd("bprevious!"))
 
 --git
 map(
@@ -84,12 +84,19 @@ map({ "n", "x" }, "gh", "^")
 -- 	end
 -- end, { expr = true })
 
---smart-i
+--smart-ai
 map("n", "i", function()
 	if vim.api.nvim_get_current_line():match("^%s*$") then
 		return "cc"
 	else
 		return "i"
+	end
+end, { expr = true })
+map("n", "a", function()
+	if vim.api.nvim_get_current_line():match("^%s*$") then
+		return "cc"
+	else
+		return "a"
 	end
 end, { expr = true })
 
@@ -98,7 +105,7 @@ map("v", "<", "<gv", {})
 map("v", ">", ">gv", {})
 
 -- Select last pasted/yanked text
-map("n", "g<C-v>", "`[v`]", { desc = "visual select last yank/paste" })
+map("n", "gV", "`[v`]", { desc = "visual select last yank/paste" })
 
 -- Search and Replace
 map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "search and replace word under cursor" })

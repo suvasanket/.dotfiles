@@ -11,4 +11,7 @@ return {
 
 	--jdtls
 	{ "mfussenegger/nvim-jdtls", ft = { "java", "xml" } },
+
+	--lsptimeout
+	{ "hinell/lsp-timeout.nvim", event = "LspAttach" },
 }
