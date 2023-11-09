@@ -33,19 +33,14 @@ map("c", "<C-a>", "<home>")
 map("c", "<C-e>", "<end>")
 
 --buffer
--- map("n", "zx", function()
--- 	if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then
--- 		vim.cmd("Alpha")
--- 		vim.cmd("bdelete! #")
--- 	else
--- 		-- vim.cmd.w()
--- 		vim.cmd.bdelete()
--- 	end
--- end)
+map("n","<leader>-",cmd("split"))
+map("n","<leader>|",cmd("vsplit"))
 map("t", "<C-[>", "<C-\\><C-n>")
 map("n", "<leader>bf", "gg=G<C-o>", { desc = "buffer format" })
-map("n", "<C-]>", cmd("bnext!"))
-map("n", "<C-[>", cmd("bprevious!"))
+map("n", "]b", cmd("bnext!"))
+map("n", "[b", cmd("bprevious!"))
+map("n", "[ob", cmd("set showtabline=2"), { desc = "showtabline" })
+map("n", "]ob", cmd("set showtabline=0"), { desc = "disabletabline" })
 
 --git
 map(
@@ -64,25 +59,25 @@ map({ "n", "x" }, "gl", "$")
 map({ "n", "x" }, "gh", "^")
 
 --smart-dele
--- map("n", "dd", function()
--- 	local line_data = vim.api.nvim_win_get_cursor(0)
--- 	local current_line = vim.api.nvim_buf_get_lines(0, line_data[1] - 1, line_data[1], false)
--- 	if current_line[1] == "" then
--- 		return '"_dd'
--- 	else
--- 		return "dd"
--- 	end
--- end, { expr = true })
---
--- map("n", "cc", function()
--- 	local line_data = vim.api.nvim_win_get_cursor(0)
--- 	local current_line = vim.api.nvim_buf_get_lines(0, line_data[1] - 1, line_data[1], false)
--- 	if current_line[1] == "" then
--- 		return '"_cc'
--- 	else
--- 		return "cc"
--- 	end
--- end, { expr = true })
+map("n", "dd", function()
+	local line_data = vim.api.nvim_win_get_cursor(0)
+	local current_line = vim.api.nvim_buf_get_lines(0, line_data[1] - 1, line_data[1], false)
+	if current_line[1] == "" then
+		return '"_dd'
+	else
+		return "dd"
+	end
+end, { expr = true })
+
+map("n", "cc", function()
+	local line_data = vim.api.nvim_win_get_cursor(0)
+	local current_line = vim.api.nvim_buf_get_lines(0, line_data[1] - 1, line_data[1], false)
+	if current_line[1] == "" then
+		return '"_cc'
+	else
+		return "cc"
+	end
+end, { expr = true })
 
 --smart-ai
 map("n", "i", function()

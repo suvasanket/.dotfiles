@@ -9,7 +9,7 @@ return {
 			color4 = "#080808", --black
 			white = "#DFCCFB", --white
 			red = "#ff5189", --red
-			neon = "#45FFCA", --voilet
+			neon = "#D0A2F7", --voilet
 			grey = "#A8A196", --grey
 			none = "NONE",
 			nbg = "#352F44",
@@ -73,7 +73,7 @@ return {
 							elseif str:sub(1, 1) == "S" then
 								return "󰪷 "
 							elseif str:sub(1, 1) == "C" then
-								return " "
+								return "󰘳 "
 							elseif str:sub(1, 1) == "O" then
 								return "󰞌 "
 							end
@@ -141,7 +141,7 @@ return {
 			},
 			tabline = {},
 			inactive_winbar = {},
-			extensions = { "nvim-tree", "fugitive", "nvim-dap-ui", "lazy" },
+			extensions = { "quickfix", "nvim-tree", "fugitive", "lazy","Trouble" },
 		})
 	end,
 }

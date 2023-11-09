@@ -3,7 +3,7 @@ return {
 	event = { "BufWritePre" },
 	keys = {
 		{
-			"<C-cr>",
+			"<C-]>",
 			function()
 				require("conform").format()
 			end,

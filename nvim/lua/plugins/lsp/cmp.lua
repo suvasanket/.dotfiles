@@ -27,7 +27,7 @@ return {
 				formatting = {
 					fields = { "abbr", "menu", "kind" },
 					format = require("lspkind").cmp_format({
-						mode = "symbol",
+						mode = "symbol_text",
 						maxwidth = 70,
 						menu = {
 							nvim_lsp = "(l)",

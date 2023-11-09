@@ -1,3 +1,4 @@
+--{{{some setting doesn't need to be shown
 local lsp = require("lspconfig")
 local root_pattern = lsp.util.root_pattern
 
@@ -19,7 +20,7 @@ vim.diagnostic.config({
 })
 
 --lsp-gutterSigns--
-local signs = { Error = "󰇙 ", Warn = "󰇙", Hint = "󰇙", Info = "󰇙" }
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
 	---@diagnostic disable-next-line: redefined-local
 	local hl = "DiagnosticSign" .. type
@@ -28,20 +29,7 @@ end
 
 --lsp on_attach
 local on_attach = function(client, bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
-	vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
-	vim.keymap.set("n", "gtd", "<cmd>Lspsaga goto_type_definition<cr>", opts)
-	vim.keymap.set("n", "K","<cmd>Lspsaga hover_doc<cr>", opts)
-	vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, opts)
-	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-	vim.keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, opts)
-
+	--inlay hint
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.buf.inlay_hint(bufnr, true)
 	end
@@ -52,6 +40,29 @@ lsp.util.default_config = vim.tbl_extend("force", lsp.util.default_config, {
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+
+--keymaps
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local opts = { noremap = true, silent = true, buffer = args.buf }
+		vim.keymap.set("n", "gi", "<cmd>TroubleToggle lsp_implementations<cr>", opts)
+		vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", opts)
+		vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
+		vim.keymap.set("n", "gtd", "<cmd>TroubleToggle lsp_type_definitions<cr>", opts)
+		vim.keymap.set("n","<leader>bd","<cmd>TroubleToggle document_diagnostics<cr>",opts)
+		vim.keymap.set("n","<leader>wd","<cmd>TroubleToggle workspace_diagnostics<cr>",opts)
+		vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+		vim.keymap.set('n', '<space>cr', vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+		vim.keymap.set("n", "<space>wl", function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end, opts)
+	end})
+--}}}
 
 --lua
 lsp.lua_ls.setup({

@@ -3,36 +3,44 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			{ "nvim-telescope/telescope-frecency.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			{ "danielfalk/smart-open.nvim" },
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
 		},
+		cmd = { "Telescope find_files" },
 		--stylua: ignore
 		keys = {
-			{ "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
-			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Oldfiles" },
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Findfiles" },
-			{ "<leader>fp", function()
-				require("telescope").extensions.projects.projects({
-					layout_config = { width = 0.6, height = 0.4 },
-				})
-			end, desc = "Project" },
 			{ "<C-f>", function()
-				require("telescope").extensions.frecency.frecency({
+				require("telescope").extensions.smart_open.smart_open({
 					attach_mappings = function(_, map)
 						map({"i", "n"}, "<C-f>", function()
 							vim.cmd("q!")
 						end)
 						return true
 					end,
-					ignore_patterns = { "*.git/*", ".local/*" },
+					search_dirs = { "~/" },
+					cwd_only = false,
+					filename_first = true,
 					previewer = false,
-					results_title="",
 					layout_config = { width = 0.6, height = 0.4 },
 				})
-			end, desc = "Find_file" },
+			end, desc = "smart_open" },
+			{ "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "CommandHist" },
+			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Oldfiles" },
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Findfiles" },
+			{ "<leader>fp", function()
+				require("telescope").extensions.projects.projects({
+					-- attach_mappings = function(_, map)
+					-- 	map({"i", "n"}, "<C-f>", function()
+					-- 		vim.cmd("q!")
+					-- 	end)
+					-- 	return true
+					-- end,
+					layout_config = { width = 0.6, height = 0.4 },
+				})
+			end, desc = "Project" },
 			{ "<leader>fc", function() require("telescope.builtin").find_files({ search_dirs = { "~/.config/nvim" }, path_display={ "tail" },prompt_title="Settings" }) end, desc = "Config_file" },
 			{ "<leader>bs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols" },
-			{ "<D-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
+			{ "<leader>bg", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "current_buffer_fuzzy_find" },
 			{ "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Workspace_symbols" },
 			{ "<leader>wg", "<cmd>Telescope grep_string<cr>", desc = "Live_grep" },
 			{ "<leader>wd", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
@@ -46,7 +54,6 @@ return {
 		config = function()
 			require("telescope").setup({
 				defaults = {
-					borderchars = { "⎻", "│", "─", "│", "╭", "╮", "╯", "╰" },
 					layout_strategy = "horizontal",
 					layout_config = {
 						height = 0.8,
@@ -71,8 +78,7 @@ return {
 				pickers = {
 					find_files = {
 						previewer = true,
-						hidden = false,
-						file_ignore_patterns = { "*/node_modules/*", "*/.git/*" },
+						hidden = true,
 					},
 					builtin = {
 						theme = "ivy",
@@ -120,7 +126,7 @@ return {
 				extensions = {},
 			})
 			require("telescope").load_extension("projects")
-			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("smart_open")
 		end,
 	},
 

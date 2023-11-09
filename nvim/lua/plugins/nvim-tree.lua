@@ -1,17 +1,19 @@
 return {
 	"nvim-tree/nvim-tree.lua",
+	cmd="NvimTreeToggle",
 	keys = {
 		{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree" },
 	},
 	opts = {
-		sync_root_with_cwd = true,
-		respect_buf_cwd = true,
+		sync_root_with_cwd = false,
+		respect_buf_cwd = false,
 		update_focused_file = {
 			enable = true,
 			update_root = true,
 		},
 		view = {
 			width = 35,
+			signcolumn = "auto",
 		},
 		renderer = {
 			full_name = true,

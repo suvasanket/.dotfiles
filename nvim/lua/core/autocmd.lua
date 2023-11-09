@@ -1,3 +1,4 @@
+--{{{
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local hl = function(name, val, id)
@@ -8,6 +9,7 @@ local hl = function(name, val, id)
 	vim.api.nvim_set_hl(defaultid, name, val)
 end
 local yank = augroup("yank", { clear = true })
+--}}}
 
 --HghLight
 autocmd("VimEnter", {
@@ -16,7 +18,8 @@ autocmd("VimEnter", {
 		hl("SagaLightBulb", { fg = "#FFD93D" })
 		hl("SagaBeacon", { bg = "#29a4bd" })
 		hl("LspSagaFinderSelection", { fg = "#61677A" })
-		-- hl("CursorLine", { blend = 3 })
+		hl("CursorLine", { blend = 3 })
+		hl("DiagnosticFloatingInfo", { blend = 10 })
 		hl("Folded", { fg = "#7D7C7C" })
 		hl("NeogitFold", { bg = "NONE" })
 		hl("Search", { bg = "#4F4557" })
@@ -41,14 +44,14 @@ autocmd("TextYankPost", {
 -- Persistent Folds
 local save_fold = augroup("Persistent Folds", { clear = true })
 autocmd("BufWinLeave", {
-	pattern = "*.*",
+	pattern = { "*.lua", "*.js", "*.java", "*.c" },
 	callback = function()
 		vim.cmd.mkview()
 	end,
 	group = save_fold,
 })
 autocmd("BufWinEnter", {
-	pattern = "*.*",
+	pattern = { "*.lua", "*.js", "*.java", "*.c" },
 	callback = function()
 		vim.cmd.loadview({ mods = { emsg_silent = true } })
 	end,
@@ -83,14 +86,6 @@ autocmd("BufReadPost", {
 	end,
 })
 
---hot reload
-autocmd("BufWritePost", {
-	pattern = "*.lua",
-	callback = function()
-		vim.cmd.source()
-	end,
-})
-
 --no auto comment
 autocmd("FileType", {
 	pattern = "*",
@@ -101,43 +96,55 @@ autocmd("FileType", {
 
 --nvim tree autoclose
 local function tab_win_closed(winnr)
-local api = require"nvim-tree.api"
-local tabnr = vim.api.nvim_win_get_tabpage(winnr)
-local bufnr = vim.api.nvim_win_get_buf(winnr)
-local buf_info = vim.fn.getbufinfo(bufnr)[1]
-local tab_wins = vim.tbl_filter(function(w) return w~=winnr end, vim.api.nvim_tabpage_list_wins(tabnr))
-local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
-if buf_info.name:match(".*NvimTree_%d*$") then            -- close buffer was nvim tree
-  -- Close all nvim tree on :q
-  if not vim.tbl_isempty(tab_bufs) then                      -- and was not the last window (not closed automatically by code below)
-    api.tree.close()
-  end
-else                                                      -- else closed buffer was normal buffer
-  if #tab_bufs == 1 then                                    -- if there is only 1 buffer left in the tab
-    local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
-    if last_buf_info.name:match(".*NvimTree_%d*$") then       -- and that buffer is nvim tree
-      vim.schedule(function ()
-	if #vim.api.nvim_list_wins() == 1 then                -- if its the last buffer in vim
-	  vim.cmd "Alpha"                                        -- then close all of vim
-	else                                                  -- else there are more tabs open
-	  vim.api.nvim_win_close(tab_wins[1], true)             -- then close only the tab
+	local api = require("nvim-tree.api")
+	local tabnr = vim.api.nvim_win_get_tabpage(winnr)
+	local bufnr = vim.api.nvim_win_get_buf(winnr)
+	local buf_info = vim.fn.getbufinfo(bufnr)[1]
+	local tab_wins = vim.tbl_filter(function(w)
+		return w ~= winnr
+	end, vim.api.nvim_tabpage_list_wins(tabnr))
+	local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
+	if buf_info.name:match(".*NvimTree_%d*$") then -- close buffer was nvim tree
+		-- Close all nvim tree on :q
+		if not vim.tbl_isempty(tab_bufs) then -- and was not the last window (not closed automatically by code below)
+			api.tree.close()
+		end
+	else -- else closed buffer was normal buffer
+		if #tab_bufs == 1 then -- if there is only 1 buffer left in the tab
+			local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
+			if last_buf_info.name:match(".*NvimTree_%d*$") then -- and that buffer is nvim tree
+				vim.schedule(function()
+					if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
+						vim.cmd("Alpha") -- then close all of vim
+					else -- else there are more tabs open
+						vim.api.nvim_win_close(tab_wins[1], true) -- then close only the tab
+					end
+				end)
+			end
+		end
 	end
-      end)
-    end
-  end
-end
 end
 autocmd("WinClosed", {
-callback = function ()
-  local winnr = tonumber(vim.fn.expand("<amatch>"))
-  vim.schedule_wrap(tab_win_closed(winnr))
-end,
-nested = true
+	callback = function()
+		local winnr = tonumber(vim.fn.expand("<amatch>"))
+		vim.schedule_wrap(tab_win_closed(winnr))
+	end,
+	nested = true,
 })
 
-autocmd("TermOpen",{
+--terminal win
+autocmd("TermOpen", {
 	pattern = "*",
 	callback = function()
-		vim.cmd"setlocal listchars= nonumber norelativenumber"
-	end
+		vim.cmd("setlocal listchars= nonumber norelativenumber")
+	end,
+})
+
+--fugitive keymap
+autocmd("FileType", {
+	pattern = "fugitive",
+	callback = function(event)
+		vim.keymap.set("n", "P", "<cmd>Git push<cr>", { buffer = event.buf, silent = true })
+		vim.keymap.set("n", "p", "<cmd>Git pull<cr>", { buffer = event.buf, silent = true })
+	end,
 })

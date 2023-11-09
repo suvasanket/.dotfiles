@@ -1,12 +1,10 @@
 return {
-	"ojroques/nvim-bufdel",
-	pin = true,
-	keys = {
-		{ "<D-w>", "<cmd>BufDel!<cr>", desc = "buffer delete" },
-		{ "zX", "<cmd>BufDelOthers!<cr>", desc = "buffer delete others" },
-	},
-	opts = {
-		next = "tabs",
-		quit = false, -- quit Neovim when last buffer is closed
+	{
+		"moll/vim-bbye",
+		pin = true,
+		keys = {
+			{ "zx", "<cmd>Bdelete<cr>", desc = "buffer delete" },
+			{ "zc", "<cmd>Bwipeout<cr>", desc = "buffer wipeout" },
+		},
 	},
 }

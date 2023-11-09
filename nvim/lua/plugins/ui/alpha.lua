@@ -10,6 +10,7 @@ return {
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "AlphaReady",
 				callback = function()
+					---@diagnostic disable-next-line: different-requires
 					require("lazy").show()
 				end,
 			})

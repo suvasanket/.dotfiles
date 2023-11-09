@@ -1,6 +1,6 @@
 return {
 	"folke/zen-mode.nvim",
-	cmd="ZenMode",
+	cmd = "ZenMode",
 	dependencies = { "folke/twilight.nvim" },
 	opts = {
 		window = {
@@ -20,7 +20,7 @@ return {
 		plugins = {
 			options = {
 				enabled = true,
-				ruler = false, -- disables the ruler text in the cmd line area
+				ruler = true, -- disables the ruler text in the cmd line area
 				showcmd = false, -- disables the command in the last line of the screen
 				laststatus = 0, -- turn off the statusline in zen mode
 			},

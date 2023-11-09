@@ -2,6 +2,7 @@ local o = vim.opt
 local c = vim.cmd
 
 -- Fix common typos
+--{{{
 c([[
     cnoreabbrev W! w!
     cnoreabbrev W1 w!
@@ -22,8 +23,10 @@ c([[
     cnoreabbrev W w
     cnoreabbrev Q q
     cnoreabbrev Qa qa
+    cnoreabbrev GW Gw
     cnoreabbrev Qall qall
 ]])
+--}}}
 
 --appearance
 vim.cmd.colorscheme("rose-pine")
@@ -43,6 +46,7 @@ o.listchars = {
 
 --fold
 o.foldmethod = "manual"
+--{{{
 c([[
 function! GetSpaces(foldLevel)
     if &expandtab == 1
@@ -61,13 +65,14 @@ function! MyFoldText()
     let indentation = GetSpaces(foldlevel("."))
     let spaces = repeat(" ", 200)
 
-    let str = indentation . startLineText
+    let str = indentation . startLineText . " .. " . endLineText
 
     return str
 endfunction
 
 " Custom display for text when folding
 set foldtext=MyFoldText()]])
+--}}}
 o.foldnestmax = 3
 o.foldminlines = 1
 
@@ -78,6 +83,7 @@ vim.g.did_load_netrw = 0
 o.swapfile = false
 o.backup = false
 o.undodir = os.getenv("HOME") .. "/dev/undodir"
+o.viewdir = os.getenv("HOME") .. "/dev/vim_ses"
 o.undofile = true
 o.updatetime = 50
 o.autochdir = true
@@ -85,7 +91,7 @@ o.autochdir = true
 --line and cursor
 o.relativenumber = true
 o.number = true
-o.cursorline = false
+o.cursorline = true
 o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
 
 --tab indent
@@ -131,6 +137,11 @@ o.ruler = false
 o.conceallevel = 2
 -- o.concealcursor = "n"
 
-o.hidden = false
+o.hidden = true
 
-vim.g.EasyClipAutoFormat = 1
+--tabline
+o.showtabline = 0
+
+o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.g.pasta_disabled_filetypes = { "fugitive" }

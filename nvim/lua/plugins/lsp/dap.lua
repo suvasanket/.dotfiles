@@ -22,7 +22,7 @@ return {
 			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "BreakPoint" },
 			{ "<Leader>dR", function() require("dap").restart() end, desc = "DapRestart" },
 			{ "<F5>", function() require("dap").continue() end },
-			{ "<F6>","<cmd>DapTerminate<cr>" },
+			{ "<leader>dq", function() require("dap").terminate() end,desc = "DapTerminate"},
 			{ "<Leader>dlp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "LogpointMsg" },
 			{ "<F9>", function() require("dap").step_back() end },
 			{ "<F10>", function() require("dap").step_over() end },
