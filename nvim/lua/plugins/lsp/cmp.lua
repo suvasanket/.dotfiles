@@ -69,7 +69,7 @@ return {
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<C- >"] = cmp.mapping.confirm({ select = true }),
 					["<tab>"] = function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()

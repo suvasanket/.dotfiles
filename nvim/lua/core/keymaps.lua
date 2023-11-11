@@ -1,3 +1,4 @@
+--{{{
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
 	if opts then
@@ -9,12 +10,20 @@ end
 local function cmd(command)
 	return table.concat({ "<Cmd>", command, "<CR>" })
 end
+--}}}
 
 --general
 map("n", "<tab>", "za")
 map("n", "<S-tab>", "zi")
 map("n", "<leader>bc", cmd("lcd%:p:h<cr>:echo 'current dir is now ' . getcwd()"), { desc = "cd_to_current_buffer" })
 map("n", "<leader>bC", ":e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.lua<CR>", { desc = "ftplugin" })
+map("n", "<leader>ms", cmd("messages"))
+
+--move line
+map("v", "<M-j>", ":m '>+1<CR>gv=gv")
+map("v", "<M-k>", ":m '<-2<CR>gv=gv")
+map("i", "<M-j>", "<Esc>:m .+1<CR>==gi")
+map("i", "<M-k>", "<Esc>:m .-2<CR>==gi")
 
 --mac
 map("i", "<M-BS>", "<C-W>")
@@ -33,8 +42,8 @@ map("c", "<C-a>", "<home>")
 map("c", "<C-e>", "<end>")
 
 --buffer
-map("n","<leader>-",cmd("split"))
-map("n","<leader>|",cmd("vsplit"))
+map("n", "<leader>-", cmd("split"))
+map("n", "<leader>|", cmd("vsplit"))
 map("t", "<C-[>", "<C-\\><C-n>")
 map("n", "<leader>bf", "gg=G<C-o>", { desc = "buffer format" })
 map("n", "]b", cmd("bnext!"))
@@ -106,3 +115,14 @@ map("n", "gV", "`[v`]", { desc = "visual select last yank/paste" })
 map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "search and replace word under cursor" })
 map("n", "c>", [[:%s/\V<C-r><C-a>//g<Left><Left>]], { desc = "search and replace WORD under cursor" })
 map("x", "c.", [[:<C-u>%s/\V<C-r>=luaeval("require'utils'.get_visual_selection(true)")<CR>//g<Left><Left>]])
+
+--copied from prime
+map("x", "<leader>p", [["_dP]], { desc = "blackhole paste" })
+
+map("n", "J", "mzJ`z")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+
+map("i", "<C-c>", "<Esc>")
