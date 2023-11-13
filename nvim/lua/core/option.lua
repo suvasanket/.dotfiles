@@ -92,7 +92,7 @@ o.autochdir = true
 o.relativenumber = true
 o.number = true
 o.cursorline = true
-o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
+-- o.guicursor = "n-v-c-i-sm:block,ci-ve:ver25,r-cr-o:hor20"
 
 --tab indent
 o.tabstop = 4

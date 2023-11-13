@@ -92,10 +92,6 @@
              (1+ (line-end-position)))))
          (overlay-put ov 'invisible t)))))
 
-;; Modern org mode
-(with-eval-after-load 'org (global-org-modern-mode))
-
-
 
 ;; $DOOMDIR/config.el
 (use-package! org-pandoc-import :after org)
@@ -111,6 +107,10 @@
 (map! :after treemacs
       :map treemacs-mode-map
       "a" #'treemacs-create-file
+      "A" #'treemacs-create-dir
+      "x" #'treemacs-move-file
+      "|" #'treemacs-visit-node-vertical-split
+      "-" #'treemacs-visit-node-horizontal-split
       "r" #'treemacs-rename-file)
 
 ;;Switch to window

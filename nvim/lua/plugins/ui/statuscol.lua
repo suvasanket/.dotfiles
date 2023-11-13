@@ -4,7 +4,7 @@ return {
 	config = function()
 		local builtin = require("statuscol.builtin")
 		require("statuscol").setup({
-			ft_ignore = { "nvim-tree", "alpha", "Trouble" },
+			ft_ignore = { "nvim-tree", "alpha", "Trouble","undotree" },
 			relculright = true,
 			segments = {
 				{

@@ -4,7 +4,7 @@ return {
 	opts = {
 		options = {
 			indicator = {
-				icon = '▊', -- this should be omitted if indicator style is not 'icon'
+				icon = "▊", -- this should be omitted if indicator style is not 'icon'
 			},
 			always_show_bufferline = true,
 			show_buffer_close_icons = false,
@@ -20,7 +20,7 @@ return {
 				},
 				{
 					filetype = "NvimTree",
-					text = "NvimTree",
+					text = "",
 					text_align = "center",
 					highlight = "Directory",
 					separator = true,

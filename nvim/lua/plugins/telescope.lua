@@ -48,7 +48,6 @@ return {
 			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "git files" },
 			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "git commits" },
 			{ "<M-x>" ,"<cmd>Telescope<cr>"},
-			{ "<leader>no", function () vim.cmd "vsplit" require("telescope.builtin").find_files({ search_dirs = { "~/neorg" } }) end, desc = "Neorg file open" }
 		},
 		config = function()
 			require("telescope").setup({

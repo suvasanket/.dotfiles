@@ -12,7 +12,7 @@ return{
 		},
 
 		highlight_groups = {
-			TelescopeBorder = { fg = "pine", bold = true },
+			TelescopeBorder = { fg = "subtle", bold = true },
 			PmenuSel = { fg = "pine", bg = "muted", blend = 3, bold = true },
 			FloatBorder = { fg = "iris" },
 			ColorColumn = { bg = "rose" },
@@ -33,6 +33,9 @@ return{
 			CmpItemAbbrMatch = { fg = "foam" },
 			CmpItemAbbrMatchFuzzy = { fg = "foam" },
 			CmpItemKindVariable = { fg = "iris" },
+			GitSignsAdd = { bg = "none" },
+			GitSignsChange = { bg = "none" },
+			GitSignsDelete = { bg = "none" },
 		},
 	},
 }

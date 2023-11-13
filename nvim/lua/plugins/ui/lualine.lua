@@ -63,19 +63,19 @@ return {
 						"mode",
 						fmt = function(str)
 							if str:sub(1, 1) == "N" then
-								return " "
+								return "󰰓 "
 							elseif str:sub(1, 1) == "I" then
-								return "󰏪 "
+								return "󰰄 "
 							elseif str:sub(1, 1) == "V" then
-								return " "
+								return "󰰫 "
 							elseif str:sub(1, 1) == "T" then
-								return " "
+								return "󰰥 "
 							elseif str:sub(1, 1) == "S" then
-								return "󰎟 "
+								return "󰰢 "
 							elseif str:sub(1, 1) == "C" then
-								return "󰘳 "
+								return "󰯲 "
 							elseif str:sub(1, 1) == "O" then
-								return " "
+								return "󰲞 "
 							end
 							return "[" .. str:sub(1, 1) .. "]"
 						end,
@@ -141,7 +141,7 @@ return {
 			},
 			tabline = {},
 			inactive_winbar = {},
-			extensions = { "quickfix", "nvim-tree", "fugitive", "lazy","Trouble" },
+			extensions = { "quickfix", "nvim-tree", "fugitive", "lazy", "Trouble" },
 		})
 	end,
 }
