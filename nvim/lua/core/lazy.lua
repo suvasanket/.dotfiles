@@ -13,11 +13,28 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 require("lazy").setup({
-	{ import = "plugins" },
-	{ import = "plugins.misc" },
-	{ import = "plugins.ui" },
-	{ import = "plugins.edit" },
-	{ import = "plugins.lsp" },
-	--ui = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
-})
+	spec = {
+		{ import = "plugins" },
+		{ import = "plugins.misc" },
+		{ import = "plugins.ui" },
+		{ import = "plugins.edit" },
+		{ import = "plugins.lsp" },
+	},
+	ui = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
 
+	performance = {
+		rtp = {
+			-- disable some rtp plugins
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
+})

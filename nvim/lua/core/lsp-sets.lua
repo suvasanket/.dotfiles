@@ -12,15 +12,64 @@ capabilities.textDocument.foldingRange = {
 
 --lsp-virtualText_prefix--
 vim.diagnostic.config({
-	virtual_text = {
-		prefix = "",
-	},
+	signs = true,
+	virtual_text = false,
 	update_in_insert = true,
 	severity_sort = true,
+	float = {
+		border = "rounded",
+		severity_sort = true,
+		header = {},
+		suffix = function(diag)
+			local message
+			if diag.code then
+				message = ("%s (%s)"):format(diag.source, diag.code)
+			else
+				message = diag.source
+			end
+			return " " .. message, "DiagnosticFloatingSuffix"
+		end,
+		prefix = function(diagnostic)
+			if diagnostic.severity == vim.diagnostic.severity.ERROR then
+				return "" -- Nerd font icon for error
+			elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+				return "" -- Nerd font icon for warning
+			elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+				return "" -- Nerd font icon for info
+			else
+				return "" -- Nerd font icon for hint
+			end
+		end,
+		format = function(diag)
+			return diag.message
+		end,
+	},
+	better_virtual_text = {
+		spacing = 4,
+		prefix = function(diagnostic)
+			if diagnostic.severity == vim.diagnostic.severity.ERROR then
+				return "*" -- Nerd font icon for error
+			elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+				return "*" -- Nerd font icon for warning
+			elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+				return "" -- Nerd font icon for info
+			else
+				return "" -- Nerd font icon for hint
+			end
+		end,
+		format = function(diagnostic)
+			local max_width = vim.g.max_width_diagnostic_virtual_text or 40
+			local message = diagnostic.message
+			if #diagnostic.message > max_width + 1 then
+				message = string.sub(diagnostic.message, 1, max_width) .. "…"
+			end
+			return message
+		end,
+	},
 })
 
 --lsp-gutterSigns--
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+local signs = { Error = "⨯", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
 	---@diagnostic disable-next-line: redefined-local
 	local hl = "DiagnosticSign" .. type
@@ -49,10 +98,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", opts)
 		vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 		vim.keymap.set("n", "gtd", "<cmd>TroubleToggle lsp_type_definitions<cr>", opts)
-		vim.keymap.set("n","<leader>bd","<cmd>TroubleToggle document_diagnostics<cr>",opts)
-		vim.keymap.set("n","<leader>wd","<cmd>TroubleToggle workspace_diagnostics<cr>",opts)
-		vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-		vim.keymap.set('n', '<space>cr', vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+		vim.keymap.set("n", "<leader>wd", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { silent = true, desc = "code_action" })
+		vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { silent = true, desc = "rename" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, opts)
@@ -61,7 +110,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
-	end})
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true, desc = "Previous diagnostic" })
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true, desc = "Next diagnostic" })
+	end,
+})
 --}}}
 
 --lua

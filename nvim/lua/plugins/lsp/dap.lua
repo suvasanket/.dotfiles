@@ -17,6 +17,7 @@ return {
 				},
 			},
 		},
+		--{{{
 		--stylua: ignore
 		keys = {
 			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "BreakPoint" },
@@ -36,8 +37,10 @@ return {
 			{ "<Leader>df", function() local widgets = require("require('dap').ui.widgets") widgets.centered_float(widgets.frames) end, desc = "DapWidgetFrame" },
 			{ "<Leader>ds", function() local widgets = require("require('dap').ui.widgets") widgets.centered_float(widgets.scopes) end, desc = "DapScopes" },
 		},
+		--}}}
 		--stylua: ignore
 		config = function()
+			--{{{ ui
 			local dap = require("dap")
 			local dapui = require("dapui")
 
@@ -63,8 +66,10 @@ return {
 			vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
 			vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" })
 			vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+			--}}}
 
 			--config--
+
 		end,
 	},
 }

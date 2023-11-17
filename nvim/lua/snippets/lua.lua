@@ -180,18 +180,6 @@ end
 	"jlf"
 )
 
--- [local] Lua local variable snippet
-cs(
-	"local",
-	fmt(
-		[[ 
-local {} = {}
-  ]],
-		{ i(1, ""), i(2, "") }
-	),
-	"jj"
-)
-
 -- End Refactoring --
 
 return snippets, autosnippets

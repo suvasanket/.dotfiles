@@ -29,7 +29,7 @@ c([[
 --}}}
 
 --appearance
-vim.cmd.colorscheme("rose-pine")
+vim.cmd"colorscheme rose-pine"
 o.termguicolors = true
 o.signcolumn = "auto"
 o.hlsearch = false
@@ -38,7 +38,7 @@ o.fillchars = {
 	eob = " ",
 }
 o.listchars = {
-	tab = "│  ",
+	-- tab = "│  ",
 	eol = "󱞥",
 	-- trail = "-",
 	-- nbsp = "+",

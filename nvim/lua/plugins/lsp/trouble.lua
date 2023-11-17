@@ -15,9 +15,18 @@ return {
 		{ "<leader>qf", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
 	},
 	opts = {
-		-- your configuration comes here
-		-- or leave it empty to use the default settings
-		-- refer to the configuration section below
-		auto_close = false,
+		-- severity = vim.diagnostic.severity.ERROR, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
+		auto_close = true,
+		indent_lines = false, -- add an indent guide below the fold icons
+		signs = {
+			error = "",
+			warning = "",
+			hint = "",
+			information = "",
+			other = "",
+		},
+		action_keys = {
+			open_split = { "<c-s>" },
+		},
 	},
 }

@@ -51,7 +51,7 @@ create_command("Run", function()
 		elseif choice == "cdebug" then
 			clang()
 		else
-			vim.cmd("echo'ran nothing'")
+			vim.cmd("echo'👍'")
 		end
 	end)
 end, {})

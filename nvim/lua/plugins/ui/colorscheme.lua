@@ -1,6 +1,10 @@
-return{
+return {
 	"rose-pine/neovim",
 	name = "rose-pine",
+	dependencies = {
+		"levouh/tint.nvim",
+		opts = {},
+	},
 	opts = {
 		dark_variant = "moon",
 		disable_background = true,

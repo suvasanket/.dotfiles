@@ -4,7 +4,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
-			{ "onsails/lspkind.nvim" },
 			{ "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
 			{ "hrsh7th/cmp-buffer", event = "BufRead" },
 			{ "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
@@ -13,6 +12,7 @@ return {
 			{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 			{
 				"Exafunction/codeium.nvim",
+				enabled = false,
 				event = "InsertEnter",
 				config = function()
 					require("codeium").setup({})
@@ -26,21 +26,6 @@ return {
 			cmp.setup({
 				formatting = {
 					fields = { "abbr", "menu", "kind" },
-					format = require("lspkind").cmp_format({
-						mode = "symbol_text",
-						maxwidth = 70,
-						menu = {
-							nvim_lsp = "(l)",
-							treesitter = "(t)",
-							path = "(p)",
-							buffer = "(b)",
-							zsh = "(z)",
-							luasnip = "(s)",
-							cmdline = "(c)",
-							codeium = "(c)",
-							neorg = "(n)",
-						},
-					}),
 				},
 				completion = {
 					keyword_length = 1,

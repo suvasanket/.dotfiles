@@ -1,5 +1,6 @@
 return {
 	"stevearc/oil.nvim",
+	enabled = false,
 	keys = { { "-", "<cmd>Oil<cr>" } },
 	opts = {
 		cleanup_delay_ms = 200,

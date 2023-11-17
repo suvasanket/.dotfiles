@@ -10,7 +10,7 @@ return {
 			"prompt",
 			"TelescopePrompt",
 			"alpha",
-			"NvimTree",
+			"neo-tree",
 		},
 		handlers = {
 			cursor = false,

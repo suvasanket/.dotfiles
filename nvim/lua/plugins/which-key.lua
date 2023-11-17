@@ -19,11 +19,6 @@ return {
 				},
 				c = {
 					name = "+code",
-					p = { "+peek" },
-					c = { "+call" },
-					e = { "+extract" },
-					t = { "+test" },
-					o = { "+organize" },
 				},
 				g = { name = "+git" },
 				d = { name = "+dap" },

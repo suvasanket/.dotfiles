@@ -68,6 +68,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "VeryLazy",
+		cmd = "TSContextToggle",
 		opts = {
 			enable = true,
 			max_lines = 0,

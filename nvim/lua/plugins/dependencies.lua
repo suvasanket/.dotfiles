@@ -6,9 +6,7 @@ return {
 	{
 		"nvim-tree/nvim-web-devicons",
 		event = "VimEnter",
-		opts = {
-			override_by_extension = { ["norg"] = { icon = "󰂺", color = "#A2678A", name = "Norg" } },
-		},
+		opts = {},
 	},
 
 	--nui
@@ -22,7 +20,7 @@ return {
 			input = {
 				mappings = {
 					n = {
-						["<Esc>"] = "Close",
+						["<C-c>"] = "Close",
 						["<CR>"] = "Confirm",
 					},
 					i = {

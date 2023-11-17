@@ -15,20 +15,15 @@ local yank = augroup("yank", { clear = true })
 autocmd("VimEnter", {
 	pattern = "*",
 	callback = function()
-		hl("SagaLightBulb", { fg = "#FFD93D" })
-		hl("SagaBeacon", { bg = "#29a4bd" })
-		hl("LspSagaFinderSelection", { fg = "#61677A" })
-		hl("CursorLine", { blend = 3 })
-		hl("DiagnosticFloatingInfo", { blend = 10 })
+		-- hl("CursorLine", { blend = 3 })
+		hl("DiagnosticFloatingInfo", { blend = 5 })
 		hl("Folded", { fg = "#7D7C7C" })
-		hl("NeogitFold", { bg = "NONE" })
 		hl("Search", { bg = "#4F4557" })
 		hl("IlluminatedWordText", { link = "Visual" })
 		hl("IlluminatedWordRead", { link = "Visual" })
 		hl("IlluminatedWordWrite", { link = "Visual" })
 		hl("hlyank", { bg = "#FF9B50" })
 		hl("SignColumn", { fg = "NONE" })
-		hl("lualine_a_normal", { bold = true })
 	end,
 })
 
@@ -107,6 +102,7 @@ autocmd("TermOpen", {
 autocmd("FileType", {
 	pattern = "fugitive",
 	callback = function(event)
+		vim.cmd("setlocal listchars= nonumber norelativenumber")
 		vim.keymap.set("n", "P", "<cmd>Git push<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("n", "p", "<cmd>Git pull<cr>", { buffer = event.buf, silent = true })
 	end,

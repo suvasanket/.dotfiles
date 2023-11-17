@@ -15,9 +15,6 @@ end
 --general
 map("n", "<tab>", "za")
 map("n", "<S-tab>", "zi")
-map("n", "<leader>bc", cmd("lcd%:p:h<cr>:echo 'current dir is now ' . getcwd()"), { desc = "cd_to_current_buffer" })
-map("n", "<leader>bC", ":e ~/.config/nvim/ftplugin/<C-R>=&filetype<CR>.lua<CR>", { desc = "ftplugin" })
-map("n", "<leader>ms", cmd("messages"))
 
 --move line
 map("v", "<M-j>", ":m '>+1<CR>gv=gv")
@@ -63,10 +60,6 @@ map("n", "<leader>gr", function()
 	vim.cmd("G remote add origin " .. user_input)
 end, { desc = "git add remote" })
 
---helix
-map({ "n", "x" }, "gl", "$")
-map({ "n", "x" }, "gh", "^")
-
 --smart-dele
 map("n", "dd", function()
 	local line_data = vim.api.nvim_win_get_cursor(0)
@@ -109,7 +102,14 @@ map("v", "<", "<gv", {})
 map("v", ">", ">gv", {})
 
 -- Select last pasted/yanked text
-map("n", "gV", "`[v`]", { desc = "visual select last yank/paste" })
+map("n", "gV", '"`[" . strpart(getregtype(), 0, 1) . "`]"', { expr = true, desc = "Visually select changed text" })
+
+-- Search inside visually highlighted text.
+map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual selection" })
+
+-- Search visually selected text
+map("x", "*", [[y/\V<C-R>=escape(@", '/\')<CR><CR>]])
+map("x", "#", [[y?\V<C-R>=escape(@", '?\')<CR><CR>]])
 
 -- Search and Replace
 map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "search and replace word under cursor" })
@@ -119,10 +119,8 @@ map("x", "c.", [[:<C-u>%s/\V<C-r>=luaeval("require'utils'.get_visual_selection(t
 --copied from prime
 map("x", "<leader>p", [["_dP]], { desc = "blackhole paste" })
 
-map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
-
-map("i", "<C-c>", "<Esc>")
+map("i", "<C-c>", "<esc>")

@@ -9,6 +9,7 @@ return {
 		cmd = { "Telescope find_files" },
 		--stylua: ignore
 		keys = {
+			{"<leader>ms","<cmd>Telescope notify theme=dropdown<cr>",desc="Notifications"},
 			{ "<C-f>", function()
 				require("telescope").extensions.smart_open.smart_open({
 					attach_mappings = function(_, map)
@@ -125,6 +126,7 @@ return {
 			})
 			require("telescope").load_extension("projects")
 			require("telescope").load_extension("smart_open")
+			require("telescope").load_extension("notify")
 		end,
 	},
 

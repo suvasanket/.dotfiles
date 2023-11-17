@@ -22,7 +22,11 @@ return {
 		local startify = require("alpha.themes.startify")
 		startify.section.header.val = require("ascii").get_random_global()
 		startify.section.top_buttons.val = { nil }
-		-- startify.section.top_buttons.val = require'alpha.fortune'()
+		startify.section.bottom_buttons.val = {
+			-- require("alpha.fortune")(),
+			startify.button("q", "quit", ":quit<CR>"),
+			startify.button("l", "last session", ":SessionManager load_last_session<CR>"),
+		}
 		return startify
 	end,
 }

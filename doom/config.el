@@ -78,6 +78,11 @@
 ;; they are implemented.
 ;; Use 'prepend for the NS and Mac ports or Emacs will crash.
 
+;;evil remap
+(define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
+;; (define-key evil-normal-state-map (kbd "C-c") 'evil-normal-state)
+
+
 (setq auto-window-vscroll nil)
 
 (setq org-hide-emphasis-markers t)
@@ -92,6 +97,8 @@
              (1+ (line-end-position)))))
          (overlay-put ov 'invisible t)))))
 
+;; Modern org mode
+(with-eval-after-load 'org (global-org-modern-mode))
 
 ;; $DOOMDIR/config.el
 (use-package! org-pandoc-import :after org)

@@ -1,6 +1,13 @@
 return {
-	"AndrewRadev/switch.vim",
+	"nguyenvukhang/nvim-toggler",
 	keys = {
-		{ "<leader>i", "<cmd>Switch<cr>", mode = { "n", "v" }, desc = "switch" },
+		{ "<leader>i", mode = { "n", "v" }, desc = "toggler" },
+	},
+	opts = {
+		inverses = {
+			["<"] = ">",
+			["<="] = ">=",
+			["=="] = "!=",
+		},
 	},
 }

@@ -1,6 +1,10 @@
 return {
 	"akinsho/bufferline.nvim",
 	event = "VeryLazy",
+	keys = {
+		{ "zn", "<cmd>BufferLineCycleNext<cr>" },
+		{ "zp", "<cmd>BufferLineCyclePrev<cr>" },
+	},
 	opts = {
 		options = {
 			indicator = {
@@ -19,7 +23,7 @@ return {
 					separator = true,
 				},
 				{
-					filetype = "NvimTree",
+					filetype = "neo-tree",
 					text = "",
 					text_align = "center",
 					highlight = "Directory",
