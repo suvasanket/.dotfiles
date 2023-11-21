@@ -1,4 +1,4 @@
-return{
+return {
 	"ThePrimeagen/refactoring.nvim",
 		--stylua: ignore
 		keys = {

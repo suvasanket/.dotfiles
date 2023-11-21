@@ -27,7 +27,7 @@ return {
 	{
 		"tpope/vim-fugitive",
 		dependencies = "tpope/vim-rhubarb",
-		event = "CmdlineEnter",
+		cmd = { "G", "Gw", "GBrowse", "GRename", "GMove", "GRemove" },
 	},
 
 	--git diff

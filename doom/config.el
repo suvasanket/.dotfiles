@@ -137,7 +137,7 @@
 
 
 ;; Doom dashboard
-(setq fancy-splash-image "~/dev/splash_img/onepiecelogo.png")
+(setq fancy-splash-image "~/dev/splash_img/doom2.png")
 ;; (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 

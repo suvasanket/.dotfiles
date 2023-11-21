@@ -29,7 +29,7 @@ c([[
 --}}}
 
 --appearance
-vim.cmd"colorscheme rose-pine"
+vim.cmd("colorscheme rose-pine")
 o.termguicolors = true
 o.signcolumn = "auto"
 o.hlsearch = false
@@ -43,38 +43,12 @@ o.listchars = {
 	-- trail = "-",
 	-- nbsp = "+",
 }
+o.hlsearch = true
 
---fold
-o.foldmethod = "manual"
---{{{
-c([[
-function! GetSpaces(foldLevel)
-    if &expandtab == 1
-        " Indenting with spaces
-        let str = repeat(" ", a:foldLevel / (&shiftwidth + 1) - 1)
-        return str
-    elseif &expandtab == 0
-        " Indenting with tabs
-        return repeat(" ", indent(v:foldstart) - (indent(v:foldstart) / &shiftwidth))
-    endif
-endfunction
-
-function! MyFoldText()
-    let startLineText = getline(v:foldstart)
-    let endLineText = trim(getline(v:foldend))
-    let indentation = GetSpaces(foldlevel("."))
-    let spaces = repeat(" ", 200)
-
-    let str = indentation . startLineText . " .. " . endLineText
-
-    return str
-endfunction
-
-" Custom display for text when folding
-set foldtext=MyFoldText()]])
---}}}
-o.foldnestmax = 3
-o.foldminlines = 1
+o.foldcolumn = "1" -- '0' is not bad
+o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+o.foldlevelstart = 99
+o.foldenable = true
 
 --netrw
 vim.g.did_load_netrw = 0

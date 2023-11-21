@@ -52,9 +52,9 @@ vim.diagnostic.config({
 			elseif diagnostic.severity == vim.diagnostic.severity.WARN then
 				return "*" -- Nerd font icon for warning
 			elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-				return "" -- Nerd font icon for info
+				return " " -- Nerd font icon for info
 			else
-				return "" -- Nerd font icon for hint
+				return " " -- Nerd font icon for hint
 			end
 		end,
 		format = function(diagnostic)
@@ -98,8 +98,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", opts)
 		vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 		vim.keymap.set("n", "gtd", "<cmd>TroubleToggle lsp_type_definitions<cr>", opts)
-		vim.keymap.set("n", "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
-		vim.keymap.set("n", "<leader>wd", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+		vim.keymap.set("n", "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", { desc = "diagnostic" })
+		vim.keymap.set("n", "<leader>cD", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "whole diagnostic" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { silent = true, desc = "code_action" })
 		vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { silent = true, desc = "rename" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)

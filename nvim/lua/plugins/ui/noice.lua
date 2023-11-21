@@ -3,6 +3,9 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		keys = {
+			{ "<esc>", "<cmd>Noice dismiss<cr>" },
+		},
 		opts = {
 			views = {
 				mini = {
@@ -21,15 +24,42 @@ return {
 					input = { pattern = "'<,'>s/", icon = "󰬲", title = "" },
 				},
 			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "lines;",
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "change;",
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "written",
+					},
+					opts = { skip = true },
+				},
+				{
+					view = "split",
+					filter = { event = "msg_show", min_height = 20 },
+				},
+			},
 			lsp = {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
-			},
-			messages = {
-				view_search = "virtualtext",
 			},
 			presets = {
 				bottom_search = false,

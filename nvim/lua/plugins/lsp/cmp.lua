@@ -1,38 +1,41 @@
 return {
+	{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+	{ "hrsh7th/cmp-buffer", event = { "InsertEnter", "CmdlineEnter" } },
+	{ "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
+	{ "hrsh7th/cmp-path", event = "InsertEnter" },
+	{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 	--nvim-cmp
 	{
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
-		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
-			{ "hrsh7th/cmp-buffer", event = "BufRead" },
-			{ "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
-			{ "hrsh7th/cmp-path" },
-			{ "ray-x/cmp-treesitter", event = "BufRead" },
-			{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
-			{
-				"Exafunction/codeium.nvim",
-				enabled = false,
-				event = "InsertEnter",
-				config = function()
-					require("codeium").setup({})
-				end,
-			},
-		},
+		dependencies = {},
 		config = function()
 			local cmp = require("cmp")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			cmp.setup({
+				sources = {
+					{ name = "path" },
+					{ name = "nvim_lsp", keyword_length = 3 },
+					{ name = "luasnip", keyword_length = 3 },
+					{ name = "buffer", keyword_length = 3 },
+				},
+
 				formatting = {
-					fields = { "abbr", "menu", "kind" },
+					fields = { "abbr", "kind", "menu" },
+					format = function(entry, vim_item)
+						vim_item.menu = ({
+							buffer = "(Buffer)",
+							nvim_lsp = "(LSP)",
+							luasnip = "(Snip)",
+							nvim_lua = "(Lua)",
+						})[entry.source.name]
+						return vim_item
+					end,
 				},
 				completion = {
-					keyword_length = 1,
+					-- keyword_length = 4,
 					completeopt = "menu,noselect",
-				},
-				view = {
-					entries = "custom",
 				},
 				snippet = {
 					expand = function(args)
@@ -78,39 +81,27 @@ return {
 						select = true,
 					}),
 				}),
-				sources = {
-					{ name = "path", priority = 100 },
-					{ name = "nvim_lsp", priority = 95 },
-					{ name = "treesitter", priority = 87 },
-					{ name = "luasnip", priority = 82 },
-					{ name = "buffer", priority = 50 },
-					{ name = "codeium" },
-					{ name = "neorg", priority = 100 },
-					{ name = "orgmode", priority = 100 },
-				},
 			})
 
 			-- Set configuration for specific filetype.
 			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources({
-					{ name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
-				}, {
+				sources = {
 					{ name = "buffer" },
-				}),
+				},
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "buffer", priority = 100 },
+					{ name = "buffer", keyword_length = 1 },
 				},
 			})
 
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "path", priority = 100 },
-					{ name = "cmdline", priority = 70 },
+					{ name = "path", keyword_length = 1 },
+					{ name = "cmdline", keyword_length = 1 },
 				},
 			})
 		end,

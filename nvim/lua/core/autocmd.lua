@@ -18,7 +18,7 @@ autocmd("VimEnter", {
 		-- hl("CursorLine", { blend = 3 })
 		hl("DiagnosticFloatingInfo", { blend = 5 })
 		hl("Folded", { fg = "#7D7C7C" })
-		hl("Search", { bg = "#4F4557" })
+		hl("Search", { link = "IncSearch" })
 		hl("IlluminatedWordText", { link = "Visual" })
 		hl("IlluminatedWordRead", { link = "Visual" })
 		hl("IlluminatedWordWrite", { link = "Visual" })
@@ -36,23 +36,6 @@ autocmd("TextYankPost", {
 	group = yank,
 })
 
--- Persistent Folds
-local save_fold = augroup("Persistent Folds", { clear = true })
-autocmd("BufWinLeave", {
-	pattern = { "*.lua", "*.js", "*.java", "*.c" },
-	callback = function()
-		vim.cmd.mkview()
-	end,
-	group = save_fold,
-})
-autocmd("BufWinEnter", {
-	pattern = { "*.lua", "*.js", "*.java", "*.c" },
-	callback = function()
-		vim.cmd.loadview({ mods = { emsg_silent = true } })
-	end,
-	group = save_fold,
-})
-
 -- Use 'q' to quit from common plugins
 autocmd("FileType", {
 	pattern = {
@@ -62,8 +45,10 @@ autocmd("FileType", {
 		"fugitive",
 		"crunner",
 		"qf",
+		"noice",
 	},
 	callback = function(event)
+		vim.cmd("setlocal listchars= nonumber norelativenumber")
 		vim.opt_local.wrap = false
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
@@ -102,7 +87,6 @@ autocmd("TermOpen", {
 autocmd("FileType", {
 	pattern = "fugitive",
 	callback = function(event)
-		vim.cmd("setlocal listchars= nonumber norelativenumber")
 		vim.keymap.set("n", "P", "<cmd>Git push<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("n", "p", "<cmd>Git pull<cr>", { buffer = event.buf, silent = true })
 	end,

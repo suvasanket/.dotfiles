@@ -44,7 +44,6 @@ return {
 				c = { fg = colors.grey, bg = colors.none },
 			},
 		}
-
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -63,110 +62,29 @@ return {
 
 			sections = {
 				lualine_a = {
-					function()
-						return "▊"
-					end,
-					{
-						"mode",
-						fmt = function(str)
-							if str:sub(1, 1) == "N" then
-								return "󰫻 "
-							elseif str:sub(1, 1) == "I" then
-								return "󱂈 "
-							elseif str:sub(1, 1) == "V" then
-								return "󱂌 "
-							elseif str:sub(1, 1) == "T" then
-								return "󰬁 "
-							elseif str:sub(1, 1) == "S" then
-								return "󱎤 "
-							elseif str:sub(1, 1) == "C" then
-								return "󰫰 "
-							elseif str:sub(1, 1) == "O" then
-								return "󰬹 "
-							end
-							return "[" .. str:sub(1, 1) .. "]"
-						end,
-					},
-					{
-						"filename",
-						path = 1,
-						shorting_target = 40,
-						symbols = {
-							modified = "󰳻",
-							readonly = "",
-							unnamed = "[No Name]",
-							newfile = "󰎔",
-						},
-					},
-				},
-				lualine_b = {
-					{ require("recorder").recordingStatus },
-				},
-				lualine_c = {
-					"branch",
-					"diff",
-					{
-						"diagnostics",
-						symbols = { error = " ", warn = " ", info = " " },
-					},
-				},
-				lualine_x = {
-					"encoding",
-					"filesize",
-				},
-				lualine_y = {
-					{
-						"filetype",
-						colored = true,
-						icon_only = false,
-						icon = { align = "left" },
-					},
-				},
-				lualine_z = {
-					-- Lsp server name .
 					{
 						function()
-							local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-							local clients = vim.lsp.get_active_clients()
-							if next(clients) == nil then
-								return "󱘺 stopped"
-							end
-							for _, client in ipairs(clients) do
-								local filetypes = client.config.filetypes
-								if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-									return "󰪩 " .. client.name
-								end
-							end
-							return "󰴀 not_avail"
+							return "▊"
 						end,
+						padding = { left = 0, right = 1 },
 					},
-					function()
-						return "▊"
-					end,
-				},
-			},
-			inactive_sections = {
-				lualine_a = {
-					function()
-						return "▊"
-					end,
 					{
 						"mode",
 						fmt = function(str)
 							if str:sub(1, 1) == "N" then
-								return "󰫻 "
+								return " "
 							elseif str:sub(1, 1) == "I" then
-								return "󱂈 "
+								return "󰗧 "
 							elseif str:sub(1, 1) == "V" then
-								return "󱂌 "
+								return "󰆽 "
 							elseif str:sub(1, 1) == "T" then
-								return "󰬁 "
+								return " "
 							elseif str:sub(1, 1) == "S" then
-								return "󱎤 "
+								return " "
 							elseif str:sub(1, 1) == "C" then
-								return "󰫰 "
+								return "󰘳 "
 							elseif str:sub(1, 1) == "O" then
-								return "󰬹 "
+								return "󰔟 "
 							end
 							return "[" .. str:sub(1, 1) .. "]"
 						end,
@@ -187,14 +105,14 @@ return {
 					{ require("recorder").recordingStatus },
 				},
 				lualine_c = {
-					"branch",
+					{ "branch", icon = "" },
 					"diff",
+				},
+				lualine_x = {
 					{
 						"diagnostics",
 						symbols = { error = " ", warn = " ", info = " " },
 					},
-				},
-				lualine_x = {
 					"encoding",
 					"filesize",
 				},
@@ -221,17 +139,110 @@ return {
 									return "󰪩 " .. client.name
 								end
 							end
-							return "󰴀"
+							return "󰴀 "
 						end,
 					},
-					function()
-						return "▊"
-					end,
+					{
+						function()
+							return "▊"
+						end,
+						padding = { left = 1, right = 0 },
+					},
+				},
+			},
+			inactive_sections = {
+				lualine_a = {
+					{
+						function()
+							return "▊"
+						end,
+						padding = { left = 0, right = 1 },
+					},
+					{
+						"mode",
+						fmt = function(str)
+							if str:sub(1, 1) == "N" then
+								return " "
+							elseif str:sub(1, 1) == "I" then
+								return "󰗧 "
+							elseif str:sub(1, 1) == "V" then
+								return "󰆽 "
+							elseif str:sub(1, 1) == "T" then
+								return " "
+							elseif str:sub(1, 1) == "S" then
+								return " "
+							elseif str:sub(1, 1) == "C" then
+								return "󰘳 "
+							elseif str:sub(1, 1) == "O" then
+								return "󰔟 "
+							end
+							return "[" .. str:sub(1, 1) .. "]"
+						end,
+					},
+					{
+						"filename",
+						path = 1,
+						shorting_target = 40,
+						symbols = {
+							modified = "󰳻",
+							readonly = "",
+							unnamed = "[No Name]",
+							newfile = "󰎔",
+						},
+					},
+				},
+				lualine_b = {
+					{ require("recorder").recordingStatus },
+				},
+				lualine_c = {
+					{ "branch", icon = "" },
+					"diff",
+				},
+				lualine_x = {
+					{
+						"diagnostics",
+						symbols = { error = " ", warn = " ", info = " " },
+					},
+					"encoding",
+					"filesize",
+				},
+				lualine_y = {
+					{
+						"filetype",
+						colored = true,
+						icon_only = false,
+						icon = { align = "left" },
+					},
+				},
+				lualine_z = {
+					-- Lsp server name .
+					{
+						function()
+							local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+							local clients = vim.lsp.get_active_clients()
+							if next(clients) == nil then
+								return "󱘺 "
+							end
+							for _, client in ipairs(clients) do
+								local filetypes = client.config.filetypes
+								if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+									return "󰪩 " .. client.name
+								end
+							end
+							return "󰴀 "
+						end,
+					},
+					{
+						function()
+							return "▊"
+						end,
+						padding = { left = 1, right = 0 },
+					},
 				},
 			},
 			-- inactive_winbar = { lualine_z = { "filename" } },
 			tabline = {},
-			extensions = { "quickfix", "neo-tree", "fugitive", "lazy", "Trouble", "nvim-dap-ui" },
+			extensions = { "noice", "symbols-outline", "neo-tree", "fugitive", "lazy", "Trouble", "nvim-dap-ui" },
 		})
 	end,
 }

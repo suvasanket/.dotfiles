@@ -1,3 +1,4 @@
+--{{{
 local function get_jdtls()
 	local mason_registry = require("mason-registry")
 	local jdtls = mason_registry.get_package("jdtls")
@@ -34,22 +35,20 @@ local function get_workspace()
 	local workspace_dir = workspace_path .. project_name
 	return workspace_dir
 end
+--}}}
 
 return {
 	{
 		"mfussenegger/nvim-jdtls",
-		dependencies = { "mfussenegger/nvim-dap", "neovim/nvim-lspconfig" },
 		ft = "java",
 		config = function()
-			-- Autocmd
+			-- {{{Autocmd
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "java" },
 				callback = function()
 					-- LSP capabilities
 					local jdtls = require("jdtls")
 					local capabilities = vim.lsp.protocol.make_client_capabilities()
-					local extendedClientCapabilities = jdtls.extendedClientCapabilities
-					extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 					local launcher, os_config, lombok = get_jdtls()
 					local workspace_dir = get_workspace()
@@ -110,8 +109,11 @@ return {
 							end,
 						})
 					end
+					--}}}
 
+					--{{{
 					local config = {
+						handlers = {},
 						cmd = {
 							"java",
 							"-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -212,9 +214,13 @@ return {
 						},
 						init_options = {
 							bundles = bundles,
-							extendedClientCapabilities = extendedClientCapabilities,
+							extendedClientCapabilities = {
+								progressReportProvider = false,
+								resolveAdditionalTextEditsSupport = true,
+							},
 						},
 					}
+					--}}}
 					require("jdtls").start_or_attach(config)
 				end,
 			})

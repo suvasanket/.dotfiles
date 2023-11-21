@@ -42,7 +42,4 @@ return {
 			},
 		},
 	},
-
-	--sql lite
-	{ "kkharji/sqlite.lua", event = "VeryLazy" },
 }

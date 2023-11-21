@@ -25,7 +25,7 @@ return {
 		startify.section.bottom_buttons.val = {
 			-- require("alpha.fortune")(),
 			startify.button("q", "quit", ":quit<CR>"),
-			startify.button("l", "last session", ":SessionManager load_last_session<CR>"),
+			startify.button("l", "last session", ":SessionManager load_current_dir_session<CR>"),
 		}
 		return startify
 	end,

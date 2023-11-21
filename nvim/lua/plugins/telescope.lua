@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			{ "danielfalk/smart-open.nvim" },
+			{ "danielfalk/smart-open.nvim", dependencies = { "kkharji/sqlite.lua" } },
 			{ "nvim-telescope/telescope-fzy-native.nvim" },
 		},
 		cmd = { "Telescope find_files" },

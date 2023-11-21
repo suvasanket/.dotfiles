@@ -15,12 +15,7 @@ end
 --general
 map("n", "<tab>", "za")
 map("n", "<S-tab>", "zi")
-
---move line
-map("v", "<M-j>", ":m '>+1<CR>gv=gv")
-map("v", "<M-k>", ":m '<-2<CR>gv=gv")
-map("i", "<M-j>", "<Esc>:m .+1<CR>==gi")
-map("i", "<M-k>", "<Esc>:m .-2<CR>==gi")
+map("n", "<leader>l", cmd("Lazy"))
 
 --mac
 map("i", "<M-BS>", "<C-W>")

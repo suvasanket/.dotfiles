@@ -7,11 +7,6 @@ return {
 	init = function()
 		vim.g.neo_tree_remove_legacy_commands = 1
 	end,
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-		"MunifTanjim/nui.nvim",
-	},
 	opts = function()
 		return {
 			close_if_last_window = true,
@@ -20,7 +15,24 @@ return {
 				hijack_netrw_behavior = "open_current",
 				filtered_items = {
 					hide_hidden = false, -- only works on Windows for hidden files/directories
-				}
+				},
+				window = {
+					mappings = {
+						["d"] = function(state)
+							local inputs = require("neo-tree.ui.inputs")
+							local path = state.tree:get_node().path
+							local msg = "Trash " .. path
+							inputs.confirm(msg, function(confirmed)
+								if not confirmed then
+									return
+								end
+
+								vim.fn.system({ "trash", vim.fn.fnameescape(path) })
+								require("neo-tree.sources.manager").refresh(state.name)
+							end)
+						end,
+					},
+				},
 			},
 			source_selector = {
 				winbar = false,

@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 -- vim: foldmethod=marker
 local ls = require("luasnip") --{{{
 local s = ls.s
@@ -15,7 +16,7 @@ local rep = require("luasnip.extras").rep
 local snippets, autosnippets = {}, {} --}}}
 
 local group = vim.api.nvim_create_augroup("Lua Snippets", { clear = true })
-local file_pattern = "*.lua"
+local file_pattern = "*.c"
 
 local function cs(trigger, nodes, opts) --{{{
 	local snippet = s(trigger, nodes)
@@ -70,6 +71,22 @@ local function cs(trigger, nodes, opts) --{{{
 end --}}}
 
 -- Start Refactoring --
+
+cs( -- main func
+	"main",
+	fmt(
+		[[
+		#include <stdio.h>
+
+		int main(){{
+			{}
+		}}
+	]],
+		{
+			i(1),
+		}
+	)
+)
 
 -- End Refactoring --
 

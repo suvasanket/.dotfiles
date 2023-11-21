@@ -1,3 +1,5 @@
+---@diagnostic disable: unused-local
+-- vim: foldmethod=marker
 local ls = require("luasnip") --{{{
 local s = ls.s
 local i = ls.i

@@ -15,10 +15,11 @@ return {
 		"kylechui/nvim-surround",
 		version = "*",
 		keys = {
-			{ "ys", mode = { "n", "v" } },
-			{ "yS", mode = { "v", "x" } },
-			{ "ds", mode = { "n" } },
-			{ "cs", mode = { "n" } },
+			{ "ys" },
+			{ "yss" },
+			{ "ds" },
+			{ "cs" },
+			{ "s", mode = "x" },
 		},
 		opts = {
 			keymaps = {
@@ -26,8 +27,8 @@ return {
 				normal_cur = "yss",
 				normal_line = "yS",
 				normal_cur_line = "ySS",
-				viual = "<C-g>s",
-				visual_line = "<C-g>s",
+				viual = "s",
+				visual_line = "s",
 				delete = "ds",
 				change = "cs",
 			},

@@ -1,3 +1,4 @@
+-- vim: foldmethod=marker
 local ls = require("luasnip") --{{{
 local s = ls.s --> snippet
 local i = ls.i --> insert node
@@ -142,42 +143,6 @@ c({}, {{ {} }}),
 		}
 	),
 	{ pattern = "*/snippets/*.lua", "jcn" }
-)
-
--- [function] Lua function snippet
-cs(
-	"function",
-	fmt(
-		[[ 
-function {}({})
-  {}
-end
-]],
-		{
-			i(1, ""),
-			i(2, ""),
-			i(3, ""),
-		}
-	),
-	"jff"
-)
-
--- [local_function] Lua function snippet
-cs(
-	"local_function",
-	fmt(
-		[[ 
-local function {}({})
-  {}
-end
-]],
-		{
-			i(1, ""),
-			i(2, ""),
-			i(3, ""),
-		}
-	),
-	"jlf"
 )
 
 -- End Refactoring --

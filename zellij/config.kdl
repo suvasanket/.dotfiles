@@ -205,7 +205,7 @@ plugins {
 //    - true
 //    - false (Default)
 //
-simplified_ui true
+simplified_ui false
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -253,7 +253,7 @@ themes {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "default"
+theme "hela"
 
 // The name of the default layout to load on startup
 // Default: "default"

@@ -6,7 +6,10 @@ return {
 
 	{
 		"tpope/vim-unimpaired",
-		event = "VeryLazy",
+		keys = {
+			{ "[" },
+			{ "]" },
+		},
 		dependencies = { "tpope/vim-repeat" },
 	},
 
