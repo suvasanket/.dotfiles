@@ -48,7 +48,6 @@ return {
 			},
 			window = {
 				mappings = {
-					["<space>"] = "none",
 					["/"] = "none",
 					["<tab>"] = "toggle_node",
 					["h"] = "navigate_up",

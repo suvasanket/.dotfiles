@@ -20,8 +20,9 @@ return {
 	end,
 	opts = function()
 		local startify = require("alpha.themes.startify")
-		startify.section.header.val = require("ascii").get_random_global()
+		startify.section.header.val = require("ascii").art.text.neovim.sharp
 		startify.section.top_buttons.val = { nil }
+		-- startify.section.mru_cwd.val = { nil }
 		startify.section.bottom_buttons.val = {
 			-- require("alpha.fortune")(),
 			startify.button("q", "quit", ":quit<CR>"),

@@ -61,11 +61,15 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			messages = {
+				view_search = false,
+			},
 			presets = {
 				bottom_search = false,
 				command_palette = false,
 				long_message_to_split = true,
 				lsp_doc_border = true,
+				inc_rename = true, -- enables an input dialog for inc-rename.nvim
 			},
 		},
 	},

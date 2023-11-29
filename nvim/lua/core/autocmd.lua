@@ -91,3 +91,14 @@ autocmd("FileType", {
 		vim.keymap.set("n", "p", "<cmd>Git pull<cr>", { buffer = event.buf, silent = true })
 	end,
 })
+
+--undotree
+autocmd("FileType", {
+	pattern = "undotree",
+	callback = function()
+		vim.cmd([[
+		nmap <buffer> <C-p> <plug>UndotreeNextState
+		nmap <buffer> <C-n> <plug>UndotreePreviousState
+		]])
+	end,
+})

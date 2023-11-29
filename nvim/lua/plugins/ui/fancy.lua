@@ -35,14 +35,13 @@ return {
 	{
 		"nvimdev/hlsearch.nvim",
 		event = "BufRead",
-		keys = {
-			{ "n" },
-			{ "N" },
-			{ "/" },
-			{ "?" },
-		},
 		config = function()
 			require("hlsearch").setup()
 		end,
+	},
+	{
+		"smjonas/inc-rename.nvim",
+		event = "LspAttach",
+		opts = {},
 	},
 }

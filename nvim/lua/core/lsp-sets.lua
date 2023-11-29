@@ -1,3 +1,4 @@
+-- vim: foldmethod=marker
 --{{{some setting doesn't need to be shown
 local lsp = require("lspconfig")
 local root_pattern = lsp.util.root_pattern
@@ -69,7 +70,7 @@ vim.diagnostic.config({
 })
 
 --lsp-gutterSigns--
-local signs = { Error = "⨯", Warn = "", Hint = "", Info = "" }
+local signs = { Error = "E", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
 	---@diagnostic disable-next-line: redefined-local
 	local hl = "DiagnosticSign" .. type
@@ -98,20 +99,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", opts)
 		vim.keymap.set("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 		vim.keymap.set("n", "gtd", "<cmd>TroubleToggle lsp_type_definitions<cr>", opts)
-		vim.keymap.set("n", "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", { desc = "diagnostic" })
-		vim.keymap.set("n", "<leader>cD", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "whole diagnostic" })
-		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { silent = true, desc = "code_action" })
-		vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { silent = true, desc = "rename" })
+		vim.keymap.set("n", "cd", "<cmd>TroubleToggle document_diagnostics<cr>", { desc = "diagnostic" })
+		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { silent = true, desc = "code_action" })
+		vim.keymap.set("n", "<F2>", ":IncRename ", { silent = true, desc = "rename" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, opts)
-		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wl", function()
+		vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+		vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+		vim.keymap.set("n", "<leader>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true, desc = "Previous diagnostic" })
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true, desc = "Next diagnostic" })
+		vim.keymap.set("n", "<C-]>", vim.lsp.buf.format, opts)
 	end,
 })
 --}}}
@@ -154,4 +153,7 @@ lsp.cssls.setup({
 lsp.emmet_ls.setup({})
 
 --c/c++
-lsp.clangd.setup({})
+capabilities.offsetEncoding = { "utf-16" }
+lsp.clangd.setup({
+	capabilities = capabilities,
+})

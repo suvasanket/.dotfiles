@@ -14,7 +14,7 @@ return {
 			toggle_preview = "p",
 			rename_symbol = "r",
 			code_actions = "a",
-			fold = "h",
+			fold = "<tab>",
 			unfold = "l",
 			fold_all = "W",
 			unfold_all = "E",

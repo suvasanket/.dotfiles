@@ -1,6 +1,15 @@
 return {
 	"Shatur/neovim-session-manager",
-	event = "VeryLazy",
+	cmd = {
+		"SessionManager",
+		"SessionManager load_current_dir_session"
+	},
+	keys = {
+		{ "<leader>ql", "<cmd>SessionManager load_last_session<cr>", desc = "last session" },
+		{ "<leader>qs", "<cmd>SessionManager load_session<cr>", desc = "load session" },
+		{ "<leader>qd", "<cmd>SessionManager delete_session<cr>", desc = "delete session" },
+	},
+	event = "QuitPre",
 	config = function()
 		local Path = require("plenary.path")
 		local config = require("session_manager.config")

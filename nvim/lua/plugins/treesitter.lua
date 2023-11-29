@@ -6,6 +6,8 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter-textobjects" },
+			{ "David-Kunz/markid" },
+			{ "HiPhish/nvim-ts-rainbow2" },
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -60,6 +62,8 @@ return {
 						},
 					},
 				},
+				markid = { enable = true },
+				rainbow = { enable = true },
 			})
 		end,
 	},
