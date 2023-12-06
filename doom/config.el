@@ -19,7 +19,7 @@
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 
 (setq doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 16))
-;
+                                        ;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
@@ -36,7 +36,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-material-dark)
 
-; This determines the style of line numbers in effect. If set to `nil', line
+                                        ; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
@@ -81,24 +81,26 @@
 ;;evil remap
 (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
 (define-key evil-normal-state-map (kbd "C-c") 'evil-normal-state)
+(define-key evil-normal-state-map (kbd "C-f") 'consult-recent-file)
 
 
+;;options
 (setq auto-window-vscroll nil)
 
 (setq org-hide-emphasis-markers t)
 
 (blink-cursor-mode 1)
 
+;; Modern org mode
+(with-eval-after-load 'org (global-org-modern-mode))
 (defun org-hide-src-block-delimiters()
   (interactive)
   (save-excursion (goto-char (point-max))
-      (while (re-search-backward "#\\+BEGIN_SRC\\|#\\+END_SRC" nil t)
-         (let ((ov (make-overlay (line-beginning-position)
-             (1+ (line-end-position)))))
-         (overlay-put ov 'invisible t)))))
+                  (while (re-search-backward "#\\+BEGIN_SRC\\|#\\+END_SRC" nil t)
+                    (let ((ov (make-overlay (line-beginning-position)
+                                            (1+ (line-end-position)))))
+                      (overlay-put ov 'invisible t)))))
 
-;; Modern org mode
-(with-eval-after-load 'org (global-org-modern-mode))
 
 ;; $DOOMDIR/config.el
 (use-package! org-pandoc-import :after org)
@@ -138,11 +140,14 @@
 
 ;; Doom dashboard
 (setq fancy-splash-image "~/dev/splash_img/doom2.png")
-;; (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
-
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(add-hook! '+doom-dashboard-functions (hide-mode-line-mode 1))
 
 ;; Emacs dired
 (map! :map dired-mode-map
       :n "h" #'dired-up-directory
       :n "l" #'dired-find-alternate-file)
+
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-major-mode-color-icon t)

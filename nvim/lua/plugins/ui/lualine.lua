@@ -1,6 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
+	pin = true,
 	config = function()
 		local thyme = require("lualine.themes.codedark")
 		local colors = {
@@ -8,40 +9,40 @@ return {
 			color1 = "#80a0ff",
 			color2 = "#C8E4B2",
 			color4 = "#080808", --black
-			white = "#DFCCFB", --white
-			red = "#ff5189", --red
-			neon = "#D0A2F7", --voilet
-			grey = "#A8A196", --grey
-			none = "NONE",
+			color5 = "#DFCCFB", --white
+			color6 = "#ff5189", --red
+			color7 = "#D0A2F7", --voilet
+			color8 = "#A8A196", --grey
+			bg = "NONE",
 			nbg = "#352F44",
 			ibg = "#1A120B",
 		}
 
 		thyme = {
 			normal = {
-				a = { fg = colors.color2, bg = colors.none, gui = "bold" },
-				b = { fg = colors.white, bg = colors.none },
-				c = { fg = colors.grey, bg = colors.none },
+				a = { fg = colors.color2, bg = colors.bg, gui = "bold" },
+				b = { fg = colors.color5, bg = colors.bg },
+				c = { fg = colors.color8, bg = colors.bg },
 			},
 			insert = {
-				a = { fg = colors.neon, bg = colors.none, gui = "bold" },
-				b = { fg = colors.white, bg = colors.none },
-				c = { fg = colors.grey, bg = colors.none },
+				a = { fg = colors.color7, bg = colors.bg, gui = "bold" },
+				b = { fg = colors.color5, bg = colors.bg },
+				c = { fg = colors.color8, bg = colors.bg },
 			},
 			visual = {
-				a = { fg = colors.red, bg = colors.none, gui = "bold" },
-				b = { fg = colors.white, bg = colors.none },
-				c = { fg = colors.grey, bg = colors.none },
+				a = { fg = colors.color6, bg = colors.bg, gui = "bold" },
+				b = { fg = colors.color5, bg = colors.bg },
+				c = { fg = colors.color8, bg = colors.bg },
 			},
 			replace = {
-				a = { fg = colors.color1, bg = colors.none, gui = "bold" },
-				b = { fg = colors.white, bg = colors.none },
-				c = { fg = colors.grey, bg = colors.none },
+				a = { fg = colors.color1, bg = colors.bg, gui = "bold" },
+				b = { fg = colors.color5, bg = colors.bg },
+				c = { fg = colors.color8, bg = colors.bg },
 			},
 			inactive = {
-				a = { fg = colors.inactive, bg = colors.none, gui = "bold" },
-				b = { fg = colors.inactive, bg = colors.none },
-				c = { fg = colors.grey, bg = colors.none },
+				a = { fg = colors.inactive, bg = colors.bg, gui = "bold" },
+				b = { fg = colors.inactive, bg = colors.bg },
+				c = { fg = colors.color8, bg = colors.bg },
 			},
 		}
 		require("lualine").setup({
@@ -51,7 +52,7 @@ return {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
-					statusline = { "alpha", "TelescopePrompt", "TelescopeResults" },
+					statusline = { "alpha", "minintro" },
 					winbar = { "alpha" },
 				},
 				globalstatus = false,
@@ -66,27 +67,12 @@ return {
 						function()
 							return "▊"
 						end,
-						padding = { left = 0, right = 1 },
+						padding = { left = 0, right = 0 },
 					},
 					{
 						"mode",
 						fmt = function(str)
-							if str:sub(1, 1) == "N" then
-								return " "
-							elseif str:sub(1, 1) == "I" then
-								return "󰗧 "
-							elseif str:sub(1, 1) == "V" then
-								return "󰆽 "
-							elseif str:sub(1, 1) == "T" then
-								return " "
-							elseif str:sub(1, 1) == "S" then
-								return " "
-							elseif str:sub(1, 1) == "C" then
-								return "󰘳 "
-							elseif str:sub(1, 1) == "O" then
-								return "󰔟 "
-							end
-							return "[" .. str:sub(1, 1) .. "]"
+							return ">" .. str:sub(1, 1) .. "<"
 						end,
 					},
 					{
@@ -101,9 +87,7 @@ return {
 						},
 					},
 				},
-				lualine_b = {
-					{ require("recorder").recordingStatus },
-				},
+				lualine_b = {},
 				lualine_c = {
 					{ "branch", icon = "" },
 					"diff",
@@ -169,27 +153,12 @@ return {
 						function()
 							return "▊"
 						end,
-						padding = { left = 0, right = 1 },
+						padding = { left = 0, right = 0 },
 					},
 					{
 						"mode",
 						fmt = function(str)
-							if str:sub(1, 1) == "N" then
-								return " "
-							elseif str:sub(1, 1) == "I" then
-								return "󰗧 "
-							elseif str:sub(1, 1) == "V" then
-								return "󰆽 "
-							elseif str:sub(1, 1) == "T" then
-								return " "
-							elseif str:sub(1, 1) == "S" then
-								return " "
-							elseif str:sub(1, 1) == "C" then
-								return "󰘳 "
-							elseif str:sub(1, 1) == "O" then
-								return "󰔟 "
-							end
-							return "[" .. str:sub(1, 1) .. "]"
+							return ">" .. str:sub(1, 1) .. "<"
 						end,
 					},
 					{
@@ -204,9 +173,7 @@ return {
 						},
 					},
 				},
-				lualine_b = {
-					{ require("recorder").recordingStatus },
-				},
+				lualine_b = {},
 				lualine_c = {
 					{ "branch", icon = "" },
 					"diff",
@@ -254,7 +221,16 @@ return {
 			},
 			-- inactive_winbar = { lualine_z = { "filename" } },
 			tabline = {},
-			extensions = { "noice", "symbols-outline", "neo-tree", "fugitive", "lazy", "Trouble", "nvim-dap-ui" },
+			extensions = {
+				"telescope",
+				"noice",
+				"symbols-outline",
+				"neo-tree",
+				"fugitive",
+				"lazy",
+				"Trouble",
+				"nvim-dap-ui",
+			},
 		})
 	end,
 }

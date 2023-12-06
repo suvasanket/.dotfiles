@@ -17,6 +17,7 @@ return {
 			"TelescopePrompt",
 			"alpha",
 			"neo-tree",
+			"minifiles"
 		},
 		handlers = {
 			cursor = false,

@@ -16,12 +16,9 @@ end
 map("n", "<tab>", "za")
 map("n", "<S-tab>", "zi")
 map("n", "<leader>l", cmd("Lazy"))
-
---mac
-map("i", "<M-BS>", "<C-W>")
-map("i", "<D-BS>", "<C-U>")
-map("n", "<D-`>", "<C-o>")
-map("n", "<S-D-`>", "<C-i>")
+map({ "n", "x" }, "<leader>p", '"+p', { desc = "clipboard paste" })
+map("x", "<c-p>", [["_dP]], { desc = "blackhole paste" })
+map("i","<s-cr>","<c-e><cr>")
 
 --insert
 map({ "i", "c" }, "<C-h>", "<left>")
@@ -112,8 +109,6 @@ map("n", "c>", [[:%s/\V<C-r><C-a>//g<Left><Left>]], { desc = "search and replace
 map("x", "c.", [[:<C-u>%s/\V<C-r>=luaeval("require'utils'.get_visual_selection(true)")<CR>//g<Left><Left>]])
 
 --copied from prime
-map("x", "<leader>p", [["_dP]], { desc = "blackhole paste" })
-
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")

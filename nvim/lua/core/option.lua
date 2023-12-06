@@ -31,7 +31,7 @@ c([[
 --appearance
 vim.cmd("colorscheme rose-pine")
 o.termguicolors = true
-o.signcolumn = "auto"
+-- o.signcolumn = "auto"
 o.hlsearch = false
 o.fillchars = {
 	fold = " ",
@@ -85,7 +85,7 @@ o.smartcase = true
 o.backspace = "indent,eol,start"
 
 --clipboard
-o.clipboard:append("unnamedplus")
+-- o.clipboard:append("unnamedplus")
 
 --split
 o.splitright = true
@@ -100,6 +100,7 @@ o.scrolloff = 17
 --indent
 o.autoindent = true
 o.smartindent = false
+o.showmode = false
 
 --status line
 o.laststatus = 0

@@ -21,7 +21,7 @@ return {
 			startinsert = true,
 		},
 		keys = {
-			{ "<F1>", "<esc><cmd>RunCode<CR>", mode = { "n", "i" }, desc = "RunCode" },
+			{ "<leader>r", "<esc><cmd>RunCode<CR>", mode = { "n" }, desc = "RunCode" },
 		},
 	},
 }

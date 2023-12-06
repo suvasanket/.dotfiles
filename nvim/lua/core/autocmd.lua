@@ -102,3 +102,12 @@ autocmd("FileType", {
 		]])
 	end,
 })
+
+
+--oil
+autocmd("FileType", {
+	pattern = "oil",
+	callback = function(event)
+		vim.keymap.set("n", "<C-d>", ":Telescope zoxide list<cr><C-l>", { buffer = event.buf, silent = true })
+	end,
+})

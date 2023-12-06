@@ -42,6 +42,8 @@ return {
 	{
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach",
-		opts = {},
+		opts = {
+			input_buffer_type = "dressing",
+		},
 	},
 }

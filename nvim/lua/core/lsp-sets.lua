@@ -15,7 +15,7 @@ capabilities.textDocument.foldingRange = {
 vim.diagnostic.config({
 	signs = true,
 	virtual_text = false,
-	update_in_insert = true,
+	update_in_insert = false,
 	severity_sort = true,
 	float = {
 		border = "rounded",
@@ -70,7 +70,7 @@ vim.diagnostic.config({
 })
 
 --lsp-gutterSigns--
-local signs = { Error = "E", Warn = "", Hint = "", Info = "" }
+local signs = { Error = "⨯", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
 	---@diagnostic disable-next-line: redefined-local
 	local hl = "DiagnosticSign" .. type

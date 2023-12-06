@@ -9,7 +9,7 @@ return {
 		{ "<leader>qs", "<cmd>SessionManager load_session<cr>", desc = "load session" },
 		{ "<leader>qd", "<cmd>SessionManager delete_session<cr>", desc = "delete session" },
 	},
-	event = "QuitPre",
+	event = {"QuitPre"},
 	config = function()
 		local Path = require("plenary.path")
 		local config = require("session_manager.config")

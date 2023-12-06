@@ -4,7 +4,7 @@ return {
 	config = function()
 		local builtin = require("statuscol.builtin")
 		require("statuscol").setup({
-			ft_ignore = { "neo-tree", "alpha", "Trouble", "undotree", "Outline" },
+			ft_ignore = { "oil", "minintro", "Trouble", "undotree", "Outline" },
 			relculright = false,
 			segments = {
 				{

@@ -1,8 +1,11 @@
 return {
 	"stevearc/oil.nvim",
 	enabled = false,
-	keys = { { "-", "<cmd>Oil<cr>" } },
+	keys = {
+		{ "-", "<cmd>Oil<cr>" },
+	},
 	opts = {
+		default_file_explorer = true,
 		cleanup_delay_ms = 200,
 		columns = {
 			"icon",
@@ -24,14 +27,14 @@ return {
 		skip_confirm_for_simple_edits = true,
 		keymaps = {
 			["g?"] = "actions.show_help",
-			["<CR>"] = "actions.select",
+			["l"] = "actions.select",
 			["<C-v>"] = "actions.select_vsplit",
 			["<C-s>"] = "actions.select_split",
 			["<C-t>"] = "actions.select_tab",
 			["<C-p>"] = "actions.preview",
 			["q"] = "actions.close",
 			["<C-l>"] = "actions.refresh",
-			["-"] = "actions.parent",
+			["h"] = "actions.parent",
 			["_"] = "actions.open_cwd",
 			["`"] = "actions.cd",
 			["~"] = "actions.tcd",
@@ -39,6 +42,10 @@ return {
 			["gx"] = "actions.open_external",
 			["g."] = "actions.toggle_hidden",
 			["g\\"] = "actions.toggle_trash",
+		},
+
+		view_options = {
+			show_hidden = true,
 		},
 	},
 }
